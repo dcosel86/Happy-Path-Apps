@@ -49,6 +49,9 @@
     border-bottom: 1px solid rgba(0,0,0,0.06);
     transition: box-shadow 0.3s;
   }
+  nav.menu-open {
+    bottom: 0; background: #ffffff;
+  }
   nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
   .nav-inner {
     max-width: 1200px; margin: 0 auto;
@@ -77,6 +80,32 @@
   }
   .nav-links a:hover, .nav-links a.active {
     color: var(--night); background: var(--cloud);
+  }
+
+  /* Hamburger */
+  .hamburger {
+    display: none; background: none; border: none; cursor: pointer;
+    padding: 8px; flex-direction: column; gap: 5px; z-index: 101;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px; background: var(--night);
+    border-radius: 2px; transition: all 0.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  @media (max-width: 700px) {
+    .hamburger { display: flex; z-index: 101; }
+    .nav-links {
+      display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px; background: #ffffff;
+    }
+    nav.menu-open { bottom: 0; }
+    .nav-links.open { display: flex; }
+    .nav-links a { font-size: 1.4rem; padding: 16px 40px; color: var(--night); }
+    .nav-links a.active { background: var(--cloud); }
   }
 
   /* ─── SHARED BUTTONS ─── */
@@ -567,6 +596,42 @@
     .ob-game-icon img { width: 56px; height: 56px; }
   }
 </style>
+<script>
+  function showPage(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.classList.toggle('active', a.dataset.page === page);
+    });
+    document.getElementById('global-footer').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(initAnimations, 100);
+    closeMenu();
+  }
+  function toggleMenu() {
+    document.querySelector('.hamburger').classList.toggle('open');
+    document.querySelector('.nav-links').classList.toggle('open');
+    document.getElementById('navbar').classList.toggle('menu-open');
+  }
+  function closeMenu() {
+    var h = document.querySelector('.hamburger');
+    var n = document.querySelector('.nav-links');
+    if (h) h.classList.remove('open');
+    if (n) n.classList.remove('open');
+    document.getElementById('navbar').classList.remove('menu-open');
+  }
+  function initAnimations() {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-up').forEach(function(el) {
+      el.classList.remove('visible');
+      observer.observe(el);
+    });
+  }
+</script>
 </head>
 <body>
 
@@ -577,11 +642,14 @@
       <div class="logo-icon">&#9728;&#65039;</div>
       Happy Path Apps
     </a>
-    <div class="nav-links">
-      <a onclick="showPage('home')" class="active" data-page="home">Home</a>
-      <a href="/onlyBirdies/" data-page="onlybirdies">OnlyBirdies</a>
-      <a onclick="showPage('apps')" data-page="apps">Our Apps</a>
-      <a onclick="showPage('contact')" data-page="contact">Contact</a>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links">
+      <a onclick="showPage('home');closeMenu()" class="active" data-page="home">Home</a>
+      <a href="onlyBirdies/" data-page="onlybirdies">OnlyBirdies</a>
+      <a onclick="showPage('apps');closeMenu()" data-page="apps">Our Apps</a>
+      <a onclick="showPage('contact');closeMenu()" data-page="contact">Contact</a>
     </div>
   </div>
 </nav>
@@ -665,7 +733,7 @@
         <div class="section-subtitle">Each app is crafted to solve a real problem with elegance and simplicity.</div>
       </div>
       <div class="apps-grid">
-        <div class="app-card fade-up" onclick="window.location.href='/onlyBirdies/'" style="cursor:pointer;">
+        <div class="app-card fade-up" onclick="window.location.href='onlyBirdies/'" style="cursor:pointer;">
           <div class="app-card-header" style="background: linear-gradient(135deg, #2D6A2E, #4CAF50);">
             <div class="app-logo">&#9971;</div>
           </div>
@@ -717,7 +785,7 @@
           <button class="btn btn-primary" style="align-self: flex-start;" onclick="alert('Thanks for reaching out!')">Send Message &rarr;</button>
         </div>
         <div class="contact-info fade-up" style="transition-delay: 0.15s;">
-          <div class="contact-info-card"><div class="contact-info-icon" style="background: rgba(255,210,51,0.15);">&#128231;</div><div><h4>Email Us</h4><p>david@happypathapps.co</p></div></div>
+          <div class="contact-info-card"><div class="contact-info-icon" style="background: rgba(255,210,51,0.15);">&#128231;</div><div><h4>Email Us</h4><p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ee8a8f98878aae868f9e9e979e8f9a868f9e9e9dc08d81">[email&#160;protected]</a></p></div></div>
           <div class="contact-info-card"><div class="contact-info-icon" style="background: rgba(59,130,246,0.12);">&#128038;</div><div><h4>Follow Along</h4><p>@happypathapps on X &amp; Instagram</p></div></div>
           <div class="contact-info-card"><div class="contact-info-icon" style="background: rgba(52,211,153,0.15);">&#128172;</div><div><h4>Response Time</h4><p>We typically respond within 24 hours on business days.</p></div></div>
           <div class="contact-info-card"><div class="contact-info-icon" style="background: rgba(255,107,90,0.12);">&#128205;</div><div><h4>Based In</h4><p>Denver, Colorado &#127956;</p></div></div>
@@ -732,43 +800,14 @@
   <p>&copy; 2026 Happy Path Apps. Made with &#9728;&#65039; in Colorado.</p>
 </footer>
 
+
 <script>
-  function showPage(page) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById('page-' + page).classList.add('active');
-    document.querySelectorAll('.nav-links a').forEach(a => {
-      a.classList.toggle('active', a.dataset.page === page);
+  document.addEventListener('DOMContentLoaded', function() {
+    initAnimations();
+    window.addEventListener('scroll', function() {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
     });
-    // Show/hide global footer (OB has its own)
-    document.getElementById('global-footer').style.display = page === 'onlybirdies' ? 'none' : 'block';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    setTimeout(initAnimations, 100);
-  }
-
-  window.addEventListener('scroll', () => {
-    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
   });
-
-  function initAnimations() {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.fade-up').forEach(el => {
-      el.classList.remove('visible');
-      observer.observe(el);
-    });
-  }
-  initAnimations();
-
-  // Force video play on page show
-  function playOBVideo() {
-    const vid = document.getElementById('ob-hero-video');
-    if (vid) { vid.play().catch(e => console.log('autoplay blocked:', e)); }
-  }
-  document.addEventListener('DOMContentLoaded', playOBVideo);
-
 </script>
 </body>
 </html>
