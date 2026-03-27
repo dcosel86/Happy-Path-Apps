@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Path Apps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sunbeam: #FFD233;
+    --coral: #FF6B5A;
+    --ocean: #3B82F6;
+    --mint: #34D399;
+    --night: #0F172A;
+    --ink: #1E293B;
+    --slate: #64748B;
+    --cloud: #F1F5F9;
+    --white: #FFFFFF;
+    --radius: 20px;
+    --radius-sm: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    background: var(--white);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 { font-family: 'Bricolage Grotesque', sans-serif; }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 32px;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800; font-size: 1.35rem; color: var(--night);
+    cursor: pointer; text-decoration: none;
+  }
+  .logo-icon {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--sunbeam), var(--coral));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; color: white;
+    box-shadow: 0 4px 12px rgba(255,107,90,0.35);
+  }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-links a {
+    text-decoration: none; color: var(--slate);
+    font-weight: 500; font-size: 0.95rem;
+    padding: 8px 18px; border-radius: 50px;
+    transition: all 0.25s;
+    cursor: pointer;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--night); background: var(--cloud);
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 120px 32px 80px;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 20%, rgba(255,210,51,0.15), transparent),
+      radial-gradient(ellipse 60% 50% at 20% 80%, rgba(59,130,246,0.1), transparent),
+      radial-gradient(ellipse 50% 40% at 90% 70%, rgba(255,107,90,0.1), transparent);
+  }
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+    align-items: center; position: relative; z-index: 1;
+  }
+  .hero-text h1 {
+    font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+    font-weight: 800; line-height: 1.1;
+    color: var(--night);
+  }
+  .hero-text h1 span {
+    background: linear-gradient(135deg, var(--coral), var(--ocean));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-text p {
+    margin-top: 24px; font-size: 1.2rem; line-height: 1.7;
+    color: var(--slate); max-width: 480px;
+  }
+  .hero-ctas {
+    margin-top: 40px; display: flex; gap: 16px; flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 32px; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600; font-size: 1rem;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--coral), #FF8A5C);
+    color: white;
+    box-shadow: 0 4px 20px rgba(255,107,90,0.4);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(255,107,90,0.5);
+  }
+  .btn-secondary {
+    background: var(--white); color: var(--night);
+    border: 2px solid rgba(0,0,0,0.1);
+  }
+  .btn-secondary:hover {
+    border-color: var(--ocean); color: var(--ocean);
+    transform: translateY(-2px);
+  }
+
+  /* Hero visual */
+  .hero-visual {
+    display: flex; justify-content: center; align-items: center;
+    position: relative;
+  }
+  .phone-mockup {
+    width: 260px; height: 520px;
+    background: var(--night);
+    border-radius: 40px; position: relative;
+    box-shadow: 0 40px 80px rgba(15,23,42,0.3), inset 0 0 0 3px rgba(255,255,255,0.1);
+    overflow: hidden;
+  }
+  .phone-mockup::before {
+    content: ''; position: absolute;
+    top: 12px; left: 50%; transform: translateX(-50%);
+    width: 90px; height: 28px;
+    background: #000; border-radius: 20px; z-index: 2;
+  }
+  .phone-screen {
+    position: absolute; inset: 8px; border-radius: 34px;
+    background: linear-gradient(160deg, #667EEA, #764BA2, #F093FB);
+    display: flex; flex-direction: column; align-items: center;
+    padding: 60px 20px 30px; overflow: hidden;
+  }
+  .phone-screen .app-icon-demo {
+    width: 64px; height: 64px; border-radius: 16px;
+    background: rgba(255,255,255,0.25); backdrop-filter: blur(10px);
+    margin-bottom: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem;
+  }
+  .phone-screen .screen-title {
+    color: white; font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 700; font-size: 1.1rem; margin-bottom: 8px;
+  }
+  .phone-screen .screen-subtitle {
+    color: rgba(255,255,255,0.7); font-size: 0.8rem; margin-bottom: 24px;
+  }
+  .screen-cards {
+    width: 100%; display: flex; flex-direction: column; gap: 10px;
+  }
+  .screen-card {
+    background: rgba(255,255,255,0.2); backdrop-filter: blur(10px);
+    border-radius: 14px; padding: 14px; display: flex; gap: 12px; align-items: center;
+  }
+  .screen-card-dot {
+    width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+  }
+  .screen-card-lines { flex: 1; }
+  .screen-card-line {
+    height: 8px; border-radius: 4px; background: rgba(255,255,255,0.35);
+    margin-bottom: 6px;
+  }
+  .screen-card-line:last-child { width: 60%; margin-bottom: 0; }
+
+  .floating-badge {
+    position: absolute; padding: 10px 18px;
+    border-radius: 14px; background: var(--white);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    font-weight: 600; font-size: 0.85rem;
+    display: flex; align-items: center; gap: 8px;
+    animation: float 3s ease-in-out infinite;
+  }
+  .floating-badge.b1 { top: 60px; right: -20px; animation-delay: 0s; }
+  .floating-badge.b2 { bottom: 80px; left: -30px; animation-delay: 1.5s; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 100px 32px; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    font-weight: 600; font-size: 0.85rem; text-transform: uppercase;
+    letter-spacing: 2px; color: var(--coral);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 800; color: var(--night);
+    margin-bottom: 16px;
+  }
+  .section-subtitle {
+    font-size: 1.1rem; color: var(--slate);
+    max-width: 560px; line-height: 1.7;
+  }
+
+  /* ─── FEATURES ─── */
+  .features-section { background: var(--cloud); }
+  .features-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 28px; margin-top: 60px;
+  }
+  .feature-card {
+    background: var(--white); border-radius: var(--radius);
+    padding: 36px 28px;
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+  }
+  .feature-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; margin-bottom: 20px;
+  }
+  .feature-card h3 {
+    font-size: 1.15rem; font-weight: 700; margin-bottom: 10px;
+    color: var(--night);
+  }
+  .feature-card p { color: var(--slate); line-height: 1.65; font-size: 0.95rem; }
+
+  /* ─── APP CARDS (Apps page) ─── */
+  .apps-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 32px; margin-top: 60px;
+  }
+  .app-card {
+    border-radius: var(--radius); overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--white);
+  }
+  .app-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.1);
+  }
+  .app-card-header {
+    height: 220px; display: flex;
+    align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .app-card-header .app-logo {
+    width: 80px; height: 80px; border-radius: 22px;
+    background: rgba(255,255,255,0.25); backdrop-filter: blur(10px);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; color: white;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    z-index: 1;
+  }
+  .app-card-body { padding: 28px; }
+  .app-card-body h3 { font-size: 1.3rem; font-weight: 700; color: var(--night); margin-bottom: 6px; }
+  .app-card-body .app-tagline { color: var(--coral); font-weight: 600; font-size: 0.85rem; margin-bottom: 12px; }
+  .app-card-body p { color: var(--slate); line-height: 1.65; font-size: 0.95rem; margin-bottom: 20px; }
+  .app-badges { display: flex; gap: 10px; }
+  .app-badge {
+    padding: 8px 16px; border-radius: 8px;
+    font-size: 0.8rem; font-weight: 600;
+    background: var(--cloud); color: var(--night);
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  /* ─── STATS ─── */
+  .stats-bar {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 32px; margin-top: 60px;
+  }
+  .stat-item { text-align: center; }
+  .stat-number {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 2.8rem; font-weight: 800;
+    background: linear-gradient(135deg, var(--coral), var(--ocean));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .stat-label {
+    margin-top: 6px; color: var(--slate); font-size: 0.95rem; font-weight: 500;
+  }
+
+  /* ─── CONTACT ─── */
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; margin-top: 60px; align-items: start;
+  }
+  .contact-form {
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .form-group label {
+    display: block; font-weight: 600; font-size: 0.9rem;
+    color: var(--night); margin-bottom: 8px;
+  }
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%; padding: 14px 18px;
+    border: 2px solid rgba(0,0,0,0.08);
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem; color: var(--night);
+    transition: border-color 0.25s;
+    background: var(--white);
+    outline: none;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    border-color: var(--ocean);
+  }
+  .form-group textarea { resize: vertical; min-height: 140px; }
+
+  .contact-info { display: flex; flex-direction: column; gap: 28px; }
+  .contact-info-card {
+    padding: 28px; border-radius: var(--radius);
+    background: var(--cloud);
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .contact-info-icon {
+    width: 48px; height: 48px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; flex-shrink: 0;
+  }
+  .contact-info-card h4 { font-size: 1rem; font-weight: 700; color: var(--night); margin-bottom: 4px; }
+  .contact-info-card p { color: var(--slate); font-size: 0.95rem; line-height: 1.5; }
+
+  /* ─── CTA BANNER ─── */
+  .cta-banner {
+    background: var(--night); border-radius: 28px;
+    padding: 72px 48px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .cta-banner::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 20% 50%, rgba(255,107,90,0.2), transparent 50%),
+      radial-gradient(circle at 80% 50%, rgba(59,130,246,0.15), transparent 50%);
+  }
+  .cta-banner h2 {
+    color: white; font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 800; position: relative; z-index: 1;
+  }
+  .cta-banner p {
+    color: rgba(255,255,255,0.6); font-size: 1.1rem;
+    margin-top: 16px; position: relative; z-index: 1;
+  }
+  .cta-banner .btn { margin-top: 32px; position: relative; z-index: 1; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 48px 32px; text-align: center;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+  footer p { color: var(--slate); font-size: 0.9rem; }
+
+  /* ─── ANIMATIONS ─── */
+  .fade-up {
+    opacity: 0; transform: translateY(30px);
+    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; text-align: center; }
+    .hero-text p { margin-left: auto; margin-right: auto; }
+    .hero-ctas { justify-content: center; }
+    .hero-visual { margin-top: 40px; }
+    .features-grid { grid-template-columns: 1fr; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .contact-grid { grid-template-columns: 1fr; }
+    .apps-grid { grid-template-columns: 1fr; }
+    .floating-badge { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .nav-inner { padding: 12px 20px; }
+    section { padding: 60px 20px; }
+    .phone-mockup { width: 220px; height: 440px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a class="logo" onclick="showPage('home')">
+      <div class="logo-icon">☀️</div>
+      Happy Path Apps
+    </a>
+    <div class="nav-links">
+      <a onclick="showPage('home')" class="active" data-page="home">Home</a>
+      <a onclick="showPage('apps')" data-page="apps">Our Apps</a>
+      <a onclick="showPage('contact')" data-page="contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════ HOME PAGE ═══════════════════════ -->
+<div id="page-home" class="page active">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text fade-up">
+        <h1>Apps that make<br>life <span>delightfully</span> simple.</h1>
+        <p>We craft mobile experiences that feel effortless. Beautiful design, thoughtful UX, and a focus on the moments that matter.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" onclick="showPage('apps')">Explore Our Apps →</a>
+          <a class="btn btn-secondary" onclick="showPage('contact')">Get in Touch</a>
+        </div>
+      </div>
+      <div class="hero-visual fade-up" style="transition-delay: 0.15s;">
+        <div class="phone-mockup">
+          <div class="phone-screen">
+            <div class="app-icon-demo">✨</div>
+            <div class="screen-title">Good Morning!</div>
+            <div class="screen-subtitle">3 tasks for today</div>
+            <div class="screen-cards">
+              <div class="screen-card">
+                <div class="screen-card-dot" style="background: rgba(255,210,51,0.5);"></div>
+                <div class="screen-card-lines">
+                  <div class="screen-card-line"></div>
+                  <div class="screen-card-line"></div>
+                </div>
+              </div>
+              <div class="screen-card">
+                <div class="screen-card-dot" style="background: rgba(52,211,153,0.5);"></div>
+                <div class="screen-card-lines">
+                  <div class="screen-card-line"></div>
+                  <div class="screen-card-line"></div>
+                </div>
+              </div>
+              <div class="screen-card">
+                <div class="screen-card-dot" style="background: rgba(59,130,246,0.5);"></div>
+                <div class="screen-card-lines">
+                  <div class="screen-card-line"></div>
+                  <div class="screen-card-line"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="floating-badge b1">⭐ 4.9 Rating</div>
+        <div class="floating-badge b2">📲 50K+ Downloads</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features-section">
+    <div class="section-inner">
+      <div class="fade-up">
+        <div class="section-label">Why Happy Path</div>
+        <div class="section-title">Built different. Built better.</div>
+        <div class="section-subtitle">We obsess over the details so your experience feels effortless every time you open our apps.</div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card fade-up">
+          <div class="feature-icon" style="background: rgba(255,210,51,0.15);">🎯</div>
+          <h3>Purpose-Driven Design</h3>
+          <p>Every screen, every interaction is designed with intention. No bloat, no confusion — just clean paths to what you need.</p>
+        </div>
+        <div class="feature-card fade-up" style="transition-delay: 0.1s;">
+          <div class="feature-icon" style="background: rgba(59,130,246,0.12);">⚡</div>
+          <h3>Lightning Performance</h3>
+          <p>Native-first architecture means our apps launch fast, respond instantly, and never make you wait around.</p>
+        </div>
+        <div class="feature-card fade-up" style="transition-delay: 0.2s;">
+          <div class="feature-icon" style="background: rgba(52,211,153,0.15);">🔒</div>
+          <h3>Privacy by Default</h3>
+          <p>Your data stays yours. We build with privacy at the core — no tracking, no selling, no compromises.</p>
+        </div>
+        <div class="feature-card fade-up" style="transition-delay: 0.05s;">
+          <div class="feature-icon" style="background: rgba(255,107,90,0.12);">💎</div>
+          <h3>Polished Details</h3>
+          <p>From subtle animations to perfect typography — we sweat the small stuff that makes the big difference.</p>
+        </div>
+        <div class="feature-card fade-up" style="transition-delay: 0.15s;">
+          <div class="feature-icon" style="background: rgba(139,92,246,0.12);">🌍</div>
+          <h3>Works Everywhere</h3>
+          <p>iOS, Android, tablet — our apps adapt beautifully to every screen and every context.</p>
+        </div>
+        <div class="feature-card fade-up" style="transition-delay: 0.25s;">
+          <div class="feature-icon" style="background: rgba(236,72,153,0.1);">💬</div>
+          <h3>Human Support</h3>
+          <p>Real people, real answers. When you need help, you'll talk to someone who actually built the app.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section>
+    <div class="section-inner">
+      <div class="stats-bar fade-up">
+        <div class="stat-item">
+          <div class="stat-number">50K+</div>
+          <div class="stat-label">Happy Users</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">4.9</div>
+          <div class="stat-label">App Store Rating</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">99.9%</div>
+          <div class="stat-label">Uptime</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Apps & Counting</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section>
+    <div class="section-inner">
+      <div class="cta-banner fade-up">
+        <h2>Ready to find your happy path?</h2>
+        <p>Explore our family of apps and discover tools made with love.</p>
+        <a class="btn btn-primary" onclick="showPage('apps')">See Our Apps →</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════ APPS PAGE ═══════════════════════ -->
+<div id="page-apps" class="page">
+  <section style="padding-top: 140px;">
+    <div class="section-inner">
+      <div class="fade-up">
+        <div class="section-label">Our Apps</div>
+        <div class="section-title">Tools for every day.</div>
+        <div class="section-subtitle">Each app is crafted to solve a real problem with elegance and simplicity.</div>
+      </div>
+      <div class="apps-grid">
+
+        <!-- App 1 -->
+        <div class="app-card fade-up">
+          <div class="app-card-header" style="background: linear-gradient(135deg, #667EEA, #764BA2);">
+            <div class="app-logo">📋</div>
+          </div>
+          <div class="app-card-body">
+            <h3>TaskFlow</h3>
+            <div class="app-tagline">Productivity, simplified</div>
+            <p>A beautifully minimal task manager that gets out of your way. Organize your day in seconds with smart lists, gentle reminders, and a distraction-free interface.</p>
+            <div class="app-badges">
+              <span class="app-badge">🍎 iOS</span>
+              <span class="app-badge">🤖 Android</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- App 2 -->
+        <div class="app-card fade-up" style="transition-delay: 0.1s;">
+          <div class="app-card-header" style="background: linear-gradient(135deg, #F093FB, #F5576C);">
+            <div class="app-logo">🧘</div>
+          </div>
+          <div class="app-card-body">
+            <h3>Breathe</h3>
+            <div class="app-tagline">Your moment of calm</div>
+            <p>Guided breathing exercises and mindfulness sessions designed to fit into even the busiest day. Just 3 minutes to reset your focus and feel centered.</p>
+            <div class="app-badges">
+              <span class="app-badge">🍎 iOS</span>
+              <span class="app-badge">🤖 Android</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- App 3 -->
+        <div class="app-card fade-up" style="transition-delay: 0.2s;">
+          <div class="app-card-header" style="background: linear-gradient(135deg, #4FACFE, #00F2FE);">
+            <div class="app-logo">💰</div>
+          </div>
+          <div class="app-card-body">
+            <h3>PennyWise</h3>
+            <div class="app-tagline">Smart money, no stress</div>
+            <p>Track spending, set budgets, and see where your money goes — all without the guilt. Beautiful charts and insights that actually help you save.</p>
+            <div class="app-badges">
+              <span class="app-badge">🍎 iOS</span>
+              <span class="app-badge">⌚ watchOS</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section>
+    <div class="section-inner">
+      <div class="cta-banner fade-up">
+        <h2>Got feedback or ideas?</h2>
+        <p>We love hearing from our users. Tell us what you think or what you'd love to see next.</p>
+        <a class="btn btn-primary" onclick="showPage('contact')">Contact Us →</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════ CONTACT PAGE ═══════════════════════ -->
+<div id="page-contact" class="page">
+  <section style="padding-top: 140px;">
+    <div class="section-inner">
+      <div class="fade-up">
+        <div class="section-label">Get in Touch</div>
+        <div class="section-title">Let's talk.</div>
+        <div class="section-subtitle">Whether you have a question, feedback, or just want to say hi — we'd love to hear from you.</div>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-form fade-up">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" placeholder="Jane Doe">
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="jane@example.com">
+          </div>
+          <div class="form-group">
+            <label>Subject</label>
+            <select>
+              <option>General Inquiry</option>
+              <option>App Support</option>
+              <option>Partnership</option>
+              <option>Press & Media</option>
+              <option>Bug Report</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea placeholder="Tell us what's on your mind..."></textarea>
+          </div>
+          <button class="btn btn-primary" style="align-self: flex-start;" onclick="alert('Thanks for reaching out! We\'ll get back to you soon.')">Send Message →</button>
+        </div>
+        <div class="contact-info fade-up" style="transition-delay: 0.15s;">
+          <div class="contact-info-card">
+            <div class="contact-info-icon" style="background: rgba(255,210,51,0.15);">📧</div>
+            <div>
+              <h4>Email Us</h4>
+              <p>hello@happypathapps.com</p>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <div class="contact-info-icon" style="background: rgba(59,130,246,0.12);">🐦</div>
+            <div>
+              <h4>Follow Along</h4>
+              <p>@happypathapps on X & Instagram</p>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <div class="contact-info-icon" style="background: rgba(52,211,153,0.15);">💬</div>
+            <div>
+              <h4>Response Time</h4>
+              <p>We typically respond within 24 hours on business days.</p>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <div class="contact-info-icon" style="background: rgba(255,107,90,0.12);">📍</div>
+            <div>
+              <h4>Based In</h4>
+              <p>Denver, Colorado 🏔️</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <p>© 2026 Happy Path Apps. Made with ☀️ in Colorado.</p>
+</footer>
+
+<script>
+  // ─── Page Navigation ───
+  function showPage(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.classList.toggle('active', a.dataset.page === page);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Re-trigger animations
+    setTimeout(initAnimations, 100);
+  }
+
+  // ─── Navbar scroll effect ───
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // ─── Scroll Animations ───
+  function initAnimations() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => {
+      el.classList.remove('visible');
+      observer.observe(el);
+    });
+  }
+
+  initAnimations();
+</script>
+</body>
+</html>
