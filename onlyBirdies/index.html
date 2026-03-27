@@ -50,6 +50,9 @@
     border-bottom: 1px solid rgba(0,0,0,0.06);
     transition: box-shadow 0.3s;
   }
+  nav.menu-open {
+    bottom: 0; background: #ffffff;
+  }
   nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
   .nav-inner {
     max-width: 1200px; margin: 0 auto;
@@ -78,6 +81,32 @@
   }
   .nav-links a:hover, .nav-links a.active {
     color: var(--night); background: var(--cloud);
+  }
+
+  /* Hamburger */
+  .hamburger {
+    display: none; background: none; border: none; cursor: pointer;
+    padding: 8px; flex-direction: column; gap: 5px; z-index: 101;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px; background: var(--night);
+    border-radius: 2px; transition: all 0.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  @media (max-width: 700px) {
+    .hamburger { display: flex; z-index: 101; }
+    .nav-links {
+      display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px; background: #ffffff;
+    }
+    nav.menu-open { bottom: 0; }
+    .nav-links.open { display: flex; }
+    .nav-links a { font-size: 1.4rem; padding: 16px 40px; color: var(--night); }
+    .nav-links a.active { background: var(--cloud); }
   }
 
   /* ─── SHARED BUTTONS ─── */
@@ -572,6 +601,21 @@
   /* Make OB page visible by default on standalone page */
   .ob-standalone { display: block !important; }
 </style>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    window.addEventListener('scroll', function() {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+    });
+    var vid = document.getElementById('ob-hero-video');
+    if (vid) vid.play().catch(function(e) { console.log('autoplay blocked:', e); });
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-up').forEach(function(el) { observer.observe(el); });
+  });
+</script>
 </head>
 <body>
 
@@ -582,7 +626,10 @@
       <div class="logo-icon">&#9728;&#65039;</div>
       Happy Path Apps
     </a>
-    <div class="nav-links">
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links">
       <a href="/">Home</a>
       <a class="active">OnlyBirdies</a>
       <a href="/#apps">Our Apps</a>
@@ -691,14 +738,20 @@
       </div>
       <div class="ob-footer-contact">
         <h4>Contact</h4>
-        <a href="mailto:david@happypathapps.co">david@happypathapps.co</a>
+        <a href="/cdn-cgi/l/email-protection#0f6b6e79666b4f676e7f7f767f6e7b676e7f7f7c216c60"><span class="__cf_email__" data-cfemail="97f3f6e1fef3d7fff6e7e7eee7f6e3fff6e7e7e4b9f4f8">[email&#160;protected]</span></a>
       </div>
     </div>
   </div>
 
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  function toggleMenu() {
+    document.querySelector('.hamburger').classList.toggle('open');
+    document.querySelector('.nav-links').classList.toggle('open');
+    document.getElementById('navbar').classList.toggle('menu-open');
+  }
+
   window.addEventListener('scroll', () => {
     document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
   });
@@ -712,11 +765,4 @@
 
   // Scroll animations
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-</script>
-</body>
-</html>
+    entries.forEach(en
