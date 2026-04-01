@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coach Assist Privacy Policy | Happy Path Apps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --green: #2D6A2E;
+    --green-light: #C6F6C6;
+    --green-accent: #4CAF50;
+    --night: #0F172A;
+    --ink: #1E293B;
+    --slate: #64748B;
+    --cloud: #F5F5F5;
+    --white: #FFFFFF;
+    --coral: #FF6B5A;
+    --ocean: #3B82F6;
+    --sunbeam: #FFD233;
+    --radius: 20px;
+    --radius-sm: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    background: var(--white);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 { font-family: 'Bricolage Grotesque', sans-serif; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    transition: box-shadow 0.3s;
+  }
+  nav.menu-open { bottom: 0; background: #ffffff; }
+  nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 32px;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800; font-size: 1.35rem; color: var(--night);
+    cursor: pointer; text-decoration: none;
+  }
+  .logo-icon {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--sunbeam), var(--coral));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; color: white;
+    box-shadow: 0 4px 12px rgba(255,107,90,0.35);
+  }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-links a {
+    text-decoration: none; color: var(--slate);
+    font-weight: 500; font-size: 0.95rem;
+    padding: 8px 18px; border-radius: 50px;
+    transition: all 0.25s; cursor: pointer;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--night); background: var(--cloud);
+  }
+
+  /* Hamburger */
+  .hamburger {
+    display: none; background: none; border: none; cursor: pointer;
+    padding: 8px; flex-direction: column; gap: 5px; z-index: 101;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px; background: var(--night);
+    border-radius: 2px; transition: all 0.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  @media (max-width: 700px) {
+    .hamburger { display: flex; z-index: 101; }
+    .nav-links {
+      display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px; background: #ffffff;
+    }
+    nav.menu-open { bottom: 0; }
+    .nav-links.open { display: flex; }
+    .nav-links a { font-size: 1.4rem; padding: 16px 40px; color: var(--night); }
+    .nav-links a.active { background: var(--cloud); }
+  }
+
+  /* ─── CONTENT ─── */
+  .content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 120px 32px 80px;
+  }
+
+  .content h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--night);
+    margin-bottom: 8px;
+  }
+
+  .last-updated {
+    color: var(--slate);
+    font-size: 0.95rem;
+    margin-bottom: 48px;
+  }
+
+  .content h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--night);
+    margin-top: 40px;
+    margin-bottom: 12px;
+  }
+
+  .content p {
+    color: var(--slate);
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+
+  .content ul {
+    color: var(--slate);
+    line-height: 1.75;
+    padding-left: 24px;
+    margin-bottom: 12px;
+  }
+
+  .content ul li {
+    margin-bottom: 4px;
+  }
+
+  .content a {
+    color: var(--green);
+    text-decoration: none;
+  }
+
+  .content a:hover {
+    text-decoration: underline;
+  }
+
+  /* ─── TABLE ─── */
+  .policy-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 0.9rem;
+  }
+  .policy-table th {
+    background: var(--cloud);
+    color: var(--night);
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 700;
+    text-align: left;
+    padding: 10px 16px;
+    border: 1px solid #e2e8f0;
+  }
+  .policy-table td {
+    color: var(--slate);
+    padding: 10px 16px;
+    border: 1px solid #e2e8f0;
+    vertical-align: top;
+  }
+  .policy-table tr:nth-child(even) td {
+    background: #fafafa;
+  }
+
+  .footer-note {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid #e2e8f0;
+    color: var(--slate);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 700px) {
+    .content { padding: 100px 24px 60px; }
+    .content h1 { font-size: 1.75rem; }
+    .policy-table { font-size: 0.8rem; }
+    .policy-table th, .policy-table td { padding: 8px 10px; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a class="logo" href="/">
+      <div class="logo-icon">&#9728;&#65039;</div>
+      Happy Path Apps
+    </a>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/#apps">Our Apps</a>
+      <a href="/#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- CONTENT -->
+<div class="content">
+  <h1>Privacy Policy</h1>
+  <p class="last-updated">Last Updated: March 15, 2026</p>
+
+  <h2>Overview</h2>
+  <p>Coach Assist ("we," "our," or "the app") is a playing time tracking app for youth sports coaches. We are committed to protecting your privacy and being transparent about how we handle your data.</p>
+
+  <h2>Data You Provide</h2>
+  <ul>
+    <li><strong>Team information:</strong> Team names and sport type</li>
+    <li><strong>Player information:</strong> Player names and jersey numbers</li>
+    <li><strong>Parent/guardian contacts:</strong> Names, phone numbers, and email addresses (optional)</li>
+    <li><strong>Game data:</strong> Dates, opponents, scores, and playing time records</li>
+  </ul>
+
+  <h2>Data Collected Automatically</h2>
+  <ul>
+    <li><strong>Analytics data:</strong> Anonymous usage statistics such as which features are used, app crashes, and general engagement patterns</li>
+    <li><strong>Device information:</strong> Device type, operating system version, and app version (for troubleshooting)</li>
+  </ul>
+
+  <h2>Data We Do NOT Collect</h2>
+  <ul>
+    <li>Location data</li>
+    <li>Photos or media</li>
+    <li>Contacts from your device (parent info is entered manually)</li>
+    <li>Payment information (handled entirely by Apple)</li>
+  </ul>
+
+  <h2>On-Device Storage</h2>
+  <p>All team, player, and game data is stored locally on your device using Apple's secure data storage. This data is not uploaded to our servers.</p>
+
+  <h2>Analytics (Firebase Analytics)</h2>
+  <p>We use Google Firebase Analytics to understand how the app is used in aggregate. This helps us improve features and fix issues. Analytics data is anonymous and cannot identify individual users.</p>
+
+  <h2>Crash Reporting (Firebase Crashlytics)</h2>
+  <p>We use Google Firebase Crashlytics to identify and fix app crashes. Crash reports include technical information about your device and the app state when a crash occurred, but do not include personal data.</p>
+
+  <h2>Communications</h2>
+  <p>When you use the "Message Team" feature, messages are sent through your device's native Messages or Mail apps. We do not have access to the content of these messages.</p>
+
+  <h2>Third-Party Services</h2>
+  <table class="policy-table">
+    <thead>
+      <tr>
+        <th>Service</th>
+        <th>Purpose</th>
+        <th>Privacy Policy</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Firebase Analytics</td>
+        <td>Usage analytics</td>
+        <td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></td>
+      </tr>
+      <tr>
+        <td>Firebase Crashlytics</td>
+        <td>Crash reporting</td>
+        <td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></td>
+      </tr>
+      <tr>
+        <td>Apple StoreKit</td>
+        <td>In-app purchases</td>
+        <td><a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">apple.com/legal/privacy</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Data Sharing</h2>
+  <p>We do not sell, rent, or share your personal data with third parties for marketing purposes.</p>
+  <p>We may share anonymous, aggregated analytics data with service providers solely to improve the app.</p>
+
+  <h2>Children's Privacy</h2>
+  <p>Coach Assist is designed for adult coaches to manage youth sports teams. The app is not directed at children under 13, and we do not knowingly collect personal information from children.</p>
+  <p>Player information entered by coaches (names and jersey numbers) is stored locally on the coach's device and is not transmitted to us.</p>
+
+  <h2>Data Retention</h2>
+  <ul>
+    <li><strong>On-device data:</strong> Retained until you delete it or uninstall the app</li>
+    <li><strong>Analytics data:</strong> Retained for up to 14 months per Google's standard retention policy</li>
+    <li><strong>Crash reports:</strong> Retained for up to 90 days</li>
+  </ul>
+
+  <h2>Your Rights</h2>
+  <p>You can:</p>
+  <ul>
+    <li>Delete your data at any time by deleting teams, players, or games within the app</li>
+    <li>Delete all data by uninstalling the app</li>
+    <li>Opt out of analytics by disabling "Share Analytics" in your device's Settings &gt; Privacy</li>
+  </ul>
+
+  <h2>Data Security</h2>
+  <p>Your data is stored locally using Apple's encrypted data storage. We do not have access to your personal data.</p>
+
+  <h2>Changes to This Policy</h2>
+  <p>We may update this Privacy Policy from time to time. We will notify you of significant changes through the app or App Store update notes.</p>
+
+  <h2>Contact Us</h2>
+  <p>If you have questions about this Privacy Policy, please contact us at:</p>
+  <p>Email: <a href="mailto:david@happypathapps.com">david@happypathapps.com</a></p>
+
+  <div class="footer-note">
+    <p>Coach Assist &mdash; Happy Path Apps</p>
+  </div>
+</div>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  function toggleMenu() {
+    const nav = document.getElementById('navbar');
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    nav.classList.toggle('menu-open');
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
