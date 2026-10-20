@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Omilía - Aphasia Speech Therapy App | Happy Path Apps</title>
+<meta name="description" content="Omilía is your partner in speech therapy: daily interactive exercises for people with aphasia, plus a therapist app to assign work and monitor progress.">
+<link rel="icon" type="image/png" href="images/omilia-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --navy: #182853;
+    --blue: #3D8DF4;
+    --blue-50: #EFF7FF;
+    --omilia-green: #0ADD18;
+    --green-light: #D7FFDA;
+    --black: #000000;
+    --night: #0F172A;
+    --ink: #1E293B;
+    --slate: #64748B;
+    --cloud: #F5F5F5;
+    --white: #FFFFFF;
+    --coral: #FF6B5A;
+    --ocean: #3B82F6;
+    --sunbeam: #FFD233;
+    --radius: 20px;
+    --radius-sm: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    background: var(--white);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 { font-family: 'Bricolage Grotesque', sans-serif; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    transition: box-shadow 0.3s;
+  }
+  nav.menu-open {
+    bottom: 0; background: #ffffff;
+  }
+  nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 32px;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800; font-size: 1.35rem; color: var(--night);
+    cursor: pointer; text-decoration: none;
+  }
+  .logo-icon {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--sunbeam), var(--coral));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; color: white;
+    box-shadow: 0 4px 12px rgba(255,107,90,0.35);
+  }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-links a {
+    text-decoration: none; color: var(--slate);
+    font-weight: 500; font-size: 0.95rem;
+    padding: 8px 18px; border-radius: 50px;
+    transition: all 0.25s; cursor: pointer;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--night); background: var(--cloud);
+  }
+
+  /* Hamburger */
+  .hamburger {
+    display: none; background: none; border: none; cursor: pointer;
+    padding: 8px; flex-direction: column; gap: 5px; z-index: 101;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px; background: var(--night);
+    border-radius: 2px; transition: all 0.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  @media (max-width: 700px) {
+    .hamburger { display: flex; z-index: 101; }
+    .nav-links {
+      display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px; background: #ffffff;
+    }
+    nav.menu-open { bottom: 0; }
+    .nav-links.open { display: flex; }
+    .nav-links a { font-size: 1.4rem; padding: 16px 40px; color: var(--night); }
+    .nav-links a.active { background: var(--cloud); }
+  }
+
+  /* ─── SHARED BUTTONS ─── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 32px; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600; font-size: 1rem;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .btn-black {
+    background: var(--black); color: white;
+    border-radius: 50px; padding: 18px 48px;
+    font-size: 1.1rem; font-weight: 700;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .btn-black:hover {
+    transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  }
+
+  section { padding: 100px 32px; }
+
+  /* ─── ANIMATIONS ─── */
+  .fade-up {
+    opacity: 0; transform: translateY(30px);
+    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  .highlight {
+    background: var(--green-light); padding: 0 8px; border-radius: 4px;
+  }
+
+  /* ─── APP STORE BADGE ─── */
+  .store-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--black); color: white; text-decoration: none;
+    padding: 10px 22px 10px 18px; border-radius: 12px;
+    border: 1px solid #A6A6A6;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .store-badge:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+  .store-badge svg { width: 26px; height: 32px; fill: white; flex-shrink: 0; }
+  .store-badge-text { display: flex; flex-direction: column; line-height: 1.1; text-align: left; }
+  .store-badge-text small { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2px; }
+  .store-badge-text strong { font-size: 1.35rem; font-weight: 600; letter-spacing: -0.3px; }
+
+  /* ══════════════════════════════════════
+     OMILÍA PAGE
+     ══════════════════════════════════════ */
+
+  /* Hero - mirrors the App Store header: exercise glyphs framing the brand */
+  .om-hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    padding: 120px 32px 80px;
+    background: linear-gradient(180deg, #FFFDF5 0%, var(--blue-50) 45%, #FFFFFF 100%);
+  }
+  .om-hero::before {
+    content: ''; position: absolute; top: -10%; right: 8%;
+    width: 520px; height: 520px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,210,51,0.28), transparent 65%);
+  }
+  .om-hero-inner {
+    position: relative; z-index: 1;
+    max-width: 1100px; width: 100%;
+    display: flex; flex-direction: column; align-items: center; gap: 48px;
+    text-align: center;
+  }
+  .om-glyph-row {
+    display: flex; justify-content: space-between; width: 100%; max-width: 860px;
+  }
+  .om-glyph-row img {
+    width: 64px; height: 64px; opacity: 0.45;
+    animation: float 4s ease-in-out infinite;
+  }
+  .om-glyph-row img:nth-child(2n) { animation-delay: 1.2s; }
+  .om-glyph-row img:nth-child(3n) { animation-delay: 2.4s; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .om-hero-content { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  .om-brand {
+    display: flex; align-items: center; gap: 16px;
+  }
+  .om-brand img { width: 84px; height: 84px; border-radius: 20px; box-shadow: 0 8px 30px rgba(10,221,24,0.25); }
+  .om-brand h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(3rem, 7vw, 4.8rem); font-weight: 800; line-height: 1;
+    color: var(--navy);
+  }
+  .om-hero-tagline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800; line-height: 1.3;
+    color: var(--black);
+  }
+  .om-hero-sub {
+    font-size: 1.15rem; color: var(--slate); line-height: 1.7; max-width: 560px;
+  }
+  .om-hero-badges {
+    display: flex; flex-direction: column; align-items: center; gap: 16px; margin-top: 12px;
+  }
+
+  .om-therapist-link { font-size: 0.98rem; color: var(--slate); }
+  .om-therapist-link a { color: var(--blue); font-weight: 600; text-decoration: none; }
+  .om-therapist-link a:hover { text-decoration: underline; }
+
+  /* Split sections (For Patients / For Therapists) */
+  .om-split { padding: 120px 32px; background: white; position: relative; }
+  .om-split.alt { background: var(--cloud); overflow: hidden; }
+  .om-split.alt::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 80px;
+    background: white;
+    clip-path: ellipse(70% 100% at 50% 0%);
+  }
+  .om-split-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: center;
+  }
+  .om-split.alt .om-split-inner { grid-template-columns: 1.1fr 1fr; }
+  .om-split-text h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2.5rem, 4.5vw, 3.5rem); font-weight: 800; line-height: 1.1;
+    color: var(--black);
+  }
+  .om-list { margin-top: 28px; list-style: none; }
+  .om-list li {
+    font-size: 1.15rem; color: var(--black); padding: 6px 0;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .om-list li::before { content: '✔'; color: var(--omilia-green); font-weight: 700; }
+  .om-motto { margin-top: 40px; font-size: 1.25rem; color: var(--black); }
+  .om-cta { margin-top: 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
+  .om-split-visual { display: flex; justify-content: center; }
+  .om-split-visual img { width: 100%; max-width: 620px; height: auto; }
+  .om-split.alt .om-split-visual img { max-width: 520px; }
+
+  /* Reviews */
+  .om-reviews { margin-top: 48px; }
+  .om-rating { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .om-stars { font-size: 1.8rem; color: #FBBF24; letter-spacing: 2px; }
+  .om-rating span { color: var(--slate); font-size: 0.95rem; font-weight: 500; }
+  .om-review-quote {
+    font-size: 1.25rem; font-style: italic; color: var(--ink);
+    line-height: 1.6; margin-bottom: 4px;
+  }
+  .om-review-attr { color: var(--slate); font-size: 0.95rem; margin-bottom: 24px; }
+
+  /* Why Omilía */
+  .om-why { padding: 100px 32px 120px; background: white; }
+  .om-why-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+  .om-section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; color: var(--black);
+  }
+  .om-why-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-top: 56px;
+  }
+  .om-why-icon {
+    width: 96px; height: 96px; border-radius: 50%;
+    border: 2.5px solid var(--black);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 18px;
+  }
+  .om-why-icon svg { width: 48px; height: 48px; fill: var(--black); }
+  .om-why-card h3 { font-size: 1.25rem; font-weight: 700; color: var(--black); margin-bottom: 12px; }
+  .om-why-card p { color: var(--ink); line-height: 1.65; font-size: 0.98rem; max-width: 320px; margin: 0 auto; }
+  .om-why-card strong { color: var(--black); }
+
+  /* Exercises grid */
+  .om-games { padding: 100px 32px 120px; background: var(--blue-50); }
+  .om-games-inner { max-width: 960px; margin: 0 auto; text-align: center; }
+  .om-games-inner p { color: var(--slate); font-size: 1.1rem; margin-top: 12px; }
+  .om-games-icons {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 36px 20px; margin-top: 56px;
+  }
+  .om-game { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .om-game img {
+    width: 84px; height: 84px; border-radius: 50%; background: white;
+    box-shadow: 0 6px 20px rgba(61,141,244,0.12);
+    transition: transform 0.25s;
+  }
+  .om-game:hover img { transform: translateY(-4px); }
+  .om-game span {
+    font-weight: 700; font-size: 0.95rem; color: var(--navy);
+    font-family: 'Bricolage Grotesque', sans-serif;
+  }
+
+  /* Story */
+  .om-story { padding: 120px 32px; background: var(--cloud); position: relative; overflow: hidden; }
+  .om-story::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 80px;
+    background: var(--black);
+    clip-path: ellipse(70% 100% at 50% 100%);
+  }
+  .om-story-inner { max-width: 760px; margin: 0 auto; padding-bottom: 40px; }
+  .om-story-title { display: flex; align-items: center; gap: 14px; margin-bottom: 32px; }
+  .om-story-title img { width: 52px; height: 52px; border-radius: 12px; }
+  .om-story-title h2 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 400; color: var(--black);
+  }
+  .om-story-title h2 strong { font-weight: 800; }
+  .om-story p { font-size: 1.1rem; line-height: 1.75; color: var(--ink); margin-bottom: 20px; }
+  .om-story-sign { margin-top: 36px; }
+  .om-story-sign p { margin-bottom: 6px; }
+  .om-story-sign a { color: var(--blue); font-weight: 600; text-decoration: none; }
+  .om-story-sign a:hover { text-decoration: underline; }
+
+  /* Footer */
+  .om-footer {
+    background: var(--black); color: white; padding: 48px 32px;
+  }
+  .om-footer-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 24px;
+  }
+  .om-footer-brand {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800; font-size: 1.4rem;
+  }
+  .om-footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+  .om-footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.95rem; }
+  .om-footer-links a:hover { color: white; }
+  .om-footer-contact { text-align: right; }
+  .om-footer-contact h4 { font-size: 1.1rem; margin-bottom: 4px; }
+  .om-footer-contact a { color: rgba(255,255,255,0.7); text-decoration: underline; font-size: 0.95rem; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .om-split-inner, .om-split.alt .om-split-inner { grid-template-columns: 1fr; gap: 48px; text-align: center; }
+    .om-list { display: inline-block; text-align: left; }
+    .om-cta, .om-rating { justify-content: center; }
+    .om-split.alt .om-split-visual { order: -1; }
+    .om-why-grid { grid-template-columns: 1fr; gap: 40px; }
+    .om-games-icons { grid-template-columns: repeat(4, 1fr); }
+    .om-footer-inner { flex-direction: column; text-align: center; }
+    .om-footer-contact { text-align: center; }
+  }
+  @media (max-width: 600px) {
+    .nav-inner { padding: 12px 20px; }
+    .om-hero { padding: 100px 16px 60px; }
+    .om-hero-inner { gap: 32px; }
+    .om-glyph-row img { width: 40px; height: 40px; }
+    .om-glyph-row img:nth-child(n+5) { display: none; }
+    .om-brand img { width: 60px; height: 60px; border-radius: 14px; }
+    .om-split, .om-why, .om-games, .om-story { padding: 64px 16px; }
+    .om-story { padding-bottom: 120px; }
+    .om-games-icons { grid-template-columns: repeat(3, 1fr); gap: 28px 12px; }
+    .om-game img { width: 68px; height: 68px; }
+    .btn-black { padding: 16px 36px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Nav linking back to main site -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a class="logo" href="/">
+      <div class="logo-icon">&#9728;&#65039;</div>
+      Happy Path Apps
+    </a>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/onlyBirdies/">OnlyBirdies</a>
+      <a class="active">Omilía</a>
+      <a href="/#apps">Our Apps</a>
+      <a href="/#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="om-hero">
+  <div class="om-hero-inner">
+    <div class="om-glyph-row" aria-hidden="true">
+      <img src="images/games/choose.png" alt="">
+      <img src="images/games/speak.png" alt="">
+      <img src="images/games/write.png" alt="">
+      <img src="images/games/draw.png" alt="">
+      <img src="images/games/connect.png" alt="">
+      <img src="images/games/build.png" alt="">
+    </div>
+
+    <div class="om-hero-content fade-up">
+      <div class="om-brand">
+        <img src="images/omilia-icon.png" alt="Omilía app icon">
+        <h1>Omilía</h1>
+      </div>
+      <p class="om-hero-tagline">Your <span class="highlight">Partner</span> in Speech <span class="highlight">Therapy</span></p>
+      <p class="om-hero-sub">Daily, interactive exercises that help people with aphasia rebuild language &mdash; and a companion app that keeps their therapist in the loop.</p>
+      <div class="om-hero-badges">
+        <a href="https://apps.apple.com/us/app/aphasia-speech-therapy-omil%C3%ADa/id1602156122" target="_blank" rel="noopener" class="store-badge" aria-label="Download Omilía on the App Store">
+          <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+          <span class="store-badge-text"><small>Download on the</small><strong>App Store</strong></span>
+        </a>
+        <p class="om-therapist-link">Speech therapist? <a href="https://apps.apple.com/us/app/slps-omil%C3%ADa-therapist/id6736846216" target="_blank" rel="noopener">Get Omilía Therapist &rarr;</a></p>
+      </div>
+    </div>
+
+    <div class="om-glyph-row" aria-hidden="true">
+      <img src="images/games/count.png" alt="">
+      <img src="images/games/directions.png" alt="">
+      <img src="images/games/read.png" alt="">
+      <img src="images/games/remember.png" alt="">
+      <img src="images/games/chat.png" alt="">
+      <img src="images/games/describe.png" alt="">
+    </div>
+  </div>
+</section>
+
+<!-- For Patients -->
+<section class="om-split" id="patients">
+  <div class="om-split-inner">
+    <div class="om-split-text fade-up">
+      <h2>For <span class="highlight">Patients</span></h2>
+      <ul class="om-list">
+        <li>2000+ game configurations</li>
+        <li>Daily interactive tasks</li>
+        <li>Simple and accessible</li>
+      </ul>
+      <p class="om-motto">Let&rsquo;s Hope. Let&rsquo;s <strong>Heal.</strong></p>
+      <div class="om-cta">
+        <a href="https://apps.apple.com/us/app/aphasia-speech-therapy-omil%C3%ADa/id1602156122" target="_blank" rel="noopener" class="btn btn-black">Join Omilía</a>
+      </div>
+      <div class="om-reviews">
+        <div class="om-rating"><div class="om-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span>4.8 on the App Store</span></div>
+        <p class="om-review-quote">&ldquo;Best aphasia app!&rdquo;</p>
+        <p class="om-review-attr">&mdash; 5 star review</p>
+        <p class="om-review-quote">&ldquo;Brilliant and easy to use!&rdquo;</p>
+        <p class="om-review-attr">&mdash; 5 star review</p>
+      </div>
+    </div>
+    <div class="om-split-visual fade-up" style="transition-delay: 0.15s;">
+      <img src="images/patient-phones.webp" width="1793" height="1595" alt="Omilía exercises: fill in the missing word, match pictures to words, and pick the right picture">
+    </div>
+  </div>
+</section>
+
+<!-- For Therapists -->
+<section class="om-split alt" id="therapists">
+  <div class="om-split-inner">
+    <div class="om-split-visual fade-up">
+      <img src="images/therapist-phones.webp" width="1770" height="1823" loading="lazy" alt="Omilía Therapist: patient list and a patient's stats and active assignments">
+    </div>
+    <div class="om-split-text fade-up" style="transition-delay: 0.15s;">
+      <h2>For <span class="highlight">Therapists</span></h2>
+      <ul class="om-list">
+        <li>Connect with your patients</li>
+        <li>Create custom assignments</li>
+        <li>Monitor patient progress</li>
+      </ul>
+      <p class="om-motto">Connect. Create. Monitor. <strong>Improve.</strong></p>
+      <div class="om-cta">
+        <a href="https://apps.apple.com/us/app/slps-omil%C3%ADa-therapist/id6736846216" target="_blank" rel="noopener" class="btn btn-black">Join Omilía Therapist</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Omilía -->
+<section class="om-why">
+  <div class="om-why-inner">
+    <h2 class="om-section-title fade-up">Why Omilía?</h2>
+    <div class="om-why-grid">
+      <div class="om-why-card fade-up">
+        <div class="om-why-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm-3 8V7a3 3 0 1 1 6 0v3H9z"/></svg></div>
+        <h3>Secure</h3>
+        <p>Omilía is designed with <strong>HIPAA compliance</strong> in mind. We use encrypted connections, access controls and more to ensure your security.</p>
+      </div>
+      <div class="om-why-card fade-up" style="transition-delay: 0.1s;">
+        <div class="om-why-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/><path d="M20 1.5l.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6zM3.5 17l.5 1.1 1.1.5-1.1.5-.5 1.1-.5-1.1-1.1-.5 1.1-.5z"/></svg></div>
+        <h3>Simple</h3>
+        <p>Omilía is built to be <strong>simple.</strong> From setup to daily use, everything is intuitive, distraction-free, and easy for anyone to use &mdash; <strong>no tech expertise required.</strong></p>
+      </div>
+      <div class="om-why-card fade-up" style="transition-delay: 0.2s;">
+        <div class="om-why-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.3 3 4.5 6.7 4.5c2.2 0 3.6 1.2 4.3 2.4h2c.7-1.2 2.1-2.4 4.3-2.4 3.7 0 5.8 3.8 4.3 7.2C19.5 16.4 12 21 12 21z"/></svg></div>
+        <h3>Satisfying</h3>
+        <p>Omilía is created to be deeply <strong>satisfying</strong>. From the encouraging feedback to the game design, it&rsquo;s crafted to promote <strong>hope, healing</strong>, and a sense of <strong>joy</strong> in every small win.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Exercises -->
+<section class="om-games">
+  <div class="om-games-inner">
+    <h2 class="om-section-title fade-up">Omilía Exercises</h2>
+    <p class="fade-up">Twelve kinds of practice, each with dozens of ways to play.</p>
+    <div class="om-games-icons fade-up">
+      <div class="om-game"><img src="images/games/choose.png" alt=""><span>Choose</span></div>
+      <div class="om-game"><img src="images/games/speak.png" alt=""><span>Speak</span></div>
+      <div class="om-game"><img src="images/games/write.png" alt=""><span>Write</span></div>
+      <div class="om-game"><img src="images/games/draw.png" alt=""><span>Draw</span></div>
+      <div class="om-game"><img src="images/games/connect.png" alt=""><span>Connect</span></div>
+      <div class="om-game"><img src="images/games/build.png" alt=""><span>Build</span></div>
+      <div class="om-game"><img src="images/games/count.png" alt=""><span>Count</span></div>
+      <div class="om-game"><img src="images/games/directions.png" alt=""><span>Directions</span></div>
+      <div class="om-game"><img src="images/games/read.png" alt=""><span>Read</span></div>
+      <div class="om-game"><img src="images/games/remember.png" alt=""><span>Remember</span></div>
+      <div class="om-game"><img src="images/games/chat.png" alt=""><span>Chat</span></div>
+      <div class="om-game"><img src="images/games/describe.png" alt=""><span>Describe</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- The Story of Omilía -->
+<section class="om-story">
+  <div class="om-story-inner fade-up">
+    <div class="om-story-title">
+      <img src="images/omilia-icon.png" alt="">
+      <h2>The <strong>Story</strong> of Omilía</h2>
+    </div>
+    <p>I had never heard of aphasia. That is, until January of 2020 when my mother-in-law suffered a severe stroke that left her needing to learn how to communicate all over again &mdash; a devastating condition that disrupted her every day life. But it&rsquo;s not just her. Millions of individuals around the world suffer from aphasia and other similar disorders related to traumatic brain injuries.</p>
+    <p>I wanted to help. I noticed a gap in existing therapy apps and thought I could use my skills as a software engineer to create a better tool to aid in her recovery. Omilía was born.</p>
+    <p>Since then, the app has grown and evolved into what it is today &mdash; including dozens of unique and fun exercises, tasks and challenges. More recently it has expanded to include a Therapist app in an effort to tighten the patient-therapist feedback loop.</p>
+    <p>Ultimately, the purpose of Omilía is to support individuals facing a difficult season of life and to offer hope. If one person is encouraged as a result of this app, it&rsquo;s all worth it.</p>
+    <div class="om-story-sign">
+      <p>God Bless,</p>
+      <p>David Cosel (Creator of Omilía)</p>
+      <p><a href="https://www.instagram.com/omilia_app/" target="_blank" rel="noopener">Follow @omilia_app on Instagram &rarr;</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<div class="om-footer">
+  <div class="om-footer-inner">
+    <div class="om-footer-brand">Happy Path Apps</div>
+    <div class="om-footer-links">
+      <a href="/">Home</a>
+      <a href="/onlyBirdies/">OnlyBirdies</a>
+      <a href="/delete-account.html">Delete Account</a>
+    </div>
+    <div class="om-footer-contact">
+      <h4>Contact</h4>
+      <a href="mailto:David@happypathapps.co">David@happypathapps.co</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleMenu() {
+    document.querySelector('.hamburger').classList.toggle('open');
+    document.querySelector('.nav-links').classList.toggle('open');
+    document.getElementById('navbar').classList.toggle('menu-open');
+  }
+
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
