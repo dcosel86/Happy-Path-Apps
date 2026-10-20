@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coach Assist - Fair Playing Time for Youth Sports | Happy Path Apps</title>
+<meta name="description" content="Coach Assist is your sideline companion for youth sports: track playing time, get smart substitution suggestions, and share game reports with parents.">
+<link rel="icon" type="image/png" href="images/coachassist-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --orange: #FF8A1F;
+    --red: #FF3B30;
+    --orange-50: #FFF4EB;
+    --orange-100: #FFE3CC;
+    --gradient: linear-gradient(135deg, var(--orange), var(--red));
+    --black: #000000;
+    --night: #0F172A;
+    --ink: #1E293B;
+    --slate: #64748B;
+    --cloud: #F5F5F5;
+    --white: #FFFFFF;
+    --coral: #FF6B5A;
+    --sunbeam: #FFD233;
+    --radius: 20px;
+    --radius-sm: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    background: var(--white);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 { font-family: 'Bricolage Grotesque', sans-serif; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    transition: box-shadow 0.3s;
+  }
+  nav.menu-open {
+    bottom: 0; background: #ffffff;
+  }
+  nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 32px;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800; font-size: 1.35rem; color: var(--night);
+    cursor: pointer; text-decoration: none;
+  }
+  .logo-icon {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--sunbeam), var(--coral));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; color: white;
+    box-shadow: 0 4px 12px rgba(255,107,90,0.35);
+  }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-links a {
+    text-decoration: none; color: var(--slate);
+    font-weight: 500; font-size: 0.95rem;
+    padding: 8px 18px; border-radius: 50px;
+    transition: all 0.25s; cursor: pointer;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--night); background: var(--cloud);
+  }
+
+  /* Our Apps dropdown */
+  .nav-dropdown { position: relative; }
+  .nav-dropdown > a { display: inline-flex; align-items: center; gap: 6px; }
+  .nav-dropdown > a::after {
+    content: ''; width: 6px; height: 6px; margin-top: -3px;
+    border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg); transition: transform 0.2s;
+  }
+  .nav-dropdown:hover > a::after, .nav-dropdown:focus-within > a::after { transform: rotate(-135deg); margin-top: 3px; }
+  .nav-menu {
+    position: absolute; top: 100%; left: 50%; padding-top: 10px;
+    transform: translate(-50%, 6px); opacity: 0; visibility: hidden;
+    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+  }
+  .nav-dropdown:hover .nav-menu, .nav-dropdown:focus-within .nav-menu {
+    opacity: 1; visibility: visible; transform: translate(-50%, 0);
+  }
+  .nav-menu-inner {
+    background: white; border-radius: 16px; padding: 8px; min-width: 300px;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 16px 40px rgba(15,23,42,0.14);
+  }
+  .nav-links .nav-menu a {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px; border-radius: 12px; color: var(--night);
+  }
+  .nav-links .nav-menu a:hover, .nav-links .nav-menu a.active { background: var(--cloud); }
+  .nav-menu img {
+    width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+  }
+  .nav-menu-text { display: flex; flex-direction: column; line-height: 1.25; }
+  .nav-menu-text strong { font-weight: 600; font-size: 0.98rem; }
+  .nav-menu-text small { color: var(--slate); font-size: 0.82rem; white-space: nowrap; }
+
+  /* Hamburger */
+  .hamburger {
+    display: none; background: none; border: none; cursor: pointer;
+    padding: 8px; flex-direction: column; gap: 5px; z-index: 101;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px; background: var(--night);
+    border-radius: 2px; transition: all 0.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  @media (max-width: 700px) {
+    .hamburger { display: flex; z-index: 101; }
+    .nav-links {
+      display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px; background: #ffffff;
+    }
+    nav.menu-open { bottom: 0; }
+    .nav-links.open { display: flex; }
+    .nav-links a { font-size: 1.4rem; padding: 16px 40px; color: var(--night); }
+    .nav-links a.active { background: var(--cloud); }
+    .nav-dropdown { display: flex; flex-direction: column; align-items: center; }
+    .nav-dropdown > a::after { display: none; }
+    .nav-menu { position: static; transform: none; opacity: 1; visibility: visible; padding-top: 0; }
+    .nav-dropdown:hover .nav-menu, .nav-dropdown:focus-within .nav-menu { transform: none; }
+    .nav-menu-inner { box-shadow: none; border: none; min-width: 0; padding: 0; }
+    .nav-links .nav-menu a { font-size: 1.05rem; padding: 8px 16px; }
+    .nav-menu img { width: 32px; height: 32px; border-radius: 8px; }
+    .nav-menu-text small { display: none; }
+  }
+
+  /* ─── SHARED ─── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 16px 36px; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700; font-size: 1.05rem;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .btn-gradient {
+    background: var(--gradient); color: white;
+    box-shadow: 0 6px 24px rgba(255,59,48,0.3);
+  }
+  .btn-gradient:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(255,59,48,0.4); }
+
+  .fade-up {
+    opacity: 0; transform: translateY(30px);
+    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  .grad-text {
+    background: var(--gradient);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  .store-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--black); color: white; text-decoration: none;
+    padding: 10px 22px 10px 18px; border-radius: 12px;
+    border: 1px solid #A6A6A6;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .store-badge:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+  .store-badge svg { width: 26px; height: 32px; fill: white; flex-shrink: 0; }
+  .store-badge-text { display: flex; flex-direction: column; line-height: 1.1; text-align: left; }
+  .store-badge-text small { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2px; }
+  .store-badge-text strong { font-size: 1.35rem; font-weight: 600; letter-spacing: -0.3px; }
+
+  .phone {
+    position: relative; border-radius: 46px; padding: 10px;
+    background: #111; box-shadow: 0 30px 60px rgba(15,23,42,0.22), inset 0 0 0 2px #2a2a2a;
+  }
+  .phone img {
+    display: block; width: 100%; height: auto; border-radius: 37px;
+    aspect-ratio: 1206 / 2622;
+  }
+
+  .ca-section-title {
+    font-size: clamp(2rem, 4vw, 2.9rem); font-weight: 800; line-height: 1.1;
+    color: var(--night); letter-spacing: -0.5px;
+  }
+  .ca-section-sub { color: var(--slate); font-size: 1.12rem; line-height: 1.65; margin-top: 14px; }
+  .ca-eyebrow {
+    display: inline-block; font-weight: 700; font-size: 0.82rem; letter-spacing: 1.2px;
+    text-transform: uppercase; color: var(--red); margin-bottom: 12px;
+  }
+
+  /* ══════════════════════════════════════
+     COACH ASSIST PAGE
+     ══════════════════════════════════════ */
+
+  /* Hero */
+  .ca-hero {
+    position: relative; overflow: hidden;
+    padding: 140px 32px 100px;
+    background: linear-gradient(180deg, #FFFBF6 0%, var(--orange-50) 60%, #FFFFFF 100%);
+  }
+  .ca-hero::before {
+    content: ''; position: absolute; top: -12%; right: -6%;
+    width: 640px; height: 640px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,138,31,0.22), transparent 65%);
+  }
+  .ca-hero-inner {
+    position: relative; z-index: 1; max-width: 1150px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.15fr 1fr; gap: 64px; align-items: center;
+  }
+  .ca-brand { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; }
+  .ca-brand img { width: 64px; height: 64px; border-radius: 15px; box-shadow: 0 8px 24px rgba(255,59,48,0.2); }
+  .ca-brand span { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 1.5rem; color: var(--night); }
+  .ca-hero h1 {
+    font-size: clamp(2.7rem, 5.6vw, 4.4rem); font-weight: 800; line-height: 1.02;
+    color: var(--night); letter-spacing: -1.5px;
+  }
+  .ca-hero-sub { font-size: 1.2rem; color: var(--slate); line-height: 1.65; margin-top: 22px; max-width: 520px; }
+  .ca-hero-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; margin-top: 34px; }
+  .ca-free-note { font-size: 0.95rem; color: var(--slate); }
+  .ca-free-note strong { color: var(--night); }
+  .ca-sports { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 36px; }
+  .ca-sport-chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: white; border: 1px solid var(--orange-100);
+    padding: 8px 16px; border-radius: 50px; font-weight: 600; font-size: 0.92rem; color: var(--night);
+  }
+  .ca-hero-visual { position: relative; display: flex; justify-content: center; }
+  .ca-hero-visual .phone { width: 300px; transform: rotate(3deg); }
+  .ca-hero-visual .phone.back {
+    position: absolute; width: 260px; left: 50%; top: 60px;
+    transform: translateX(-108%) rotate(-7deg); opacity: 0.95;
+  }
+  .ca-float-card {
+    position: absolute; right: -10px; bottom: 70px; z-index: 2;
+    background: white; border-radius: 16px; padding: 14px 18px;
+    box-shadow: 0 16px 40px rgba(15,23,42,0.16);
+    display: flex; align-items: center; gap: 12px;
+    animation: float 4s ease-in-out infinite;
+  }
+  .ca-float-card .dot {
+    width: 38px; height: 38px; border-radius: 50%; background: var(--gradient);
+    display: flex; align-items: center; justify-content: center; color: white; font-size: 1.1rem;
+  }
+  .ca-float-card strong { display: block; font-size: 0.95rem; color: var(--night); }
+  .ca-float-card small { color: var(--slate); font-size: 0.82rem; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* Problem / promise strip */
+  .ca-promise { padding: 90px 32px; background: white; }
+  .ca-promise-inner { max-width: 820px; margin: 0 auto; text-align: center; }
+  .ca-promise p.big {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 600; line-height: 1.4; color: var(--night);
+  }
+
+  /* How it works */
+  .ca-how { padding: 100px 32px 120px; background: var(--cloud); position: relative; overflow: hidden; }
+  .ca-how::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 80px;
+    background: white; clip-path: ellipse(70% 100% at 50% 0%);
+  }
+  .ca-how-inner { position: relative; max-width: 1200px; margin: 0 auto; text-align: center; }
+  .ca-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px; margin-top: 64px; }
+  .ca-step { text-align: left; }
+  .ca-step .phone { max-width: 250px; margin: 0 auto 28px; }
+  .ca-step-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px; border-radius: 50%; background: var(--gradient);
+    color: white; font-weight: 700; font-size: 0.95rem; margin-bottom: 12px;
+  }
+  .ca-step h3 { font-size: 1.25rem; font-weight: 700; color: var(--night); margin-bottom: 8px; }
+  .ca-step p { color: var(--slate); line-height: 1.6; font-size: 0.98rem; }
+
+  /* Sports */
+  .ca-sports-sec { padding: 110px 32px; background: white; }
+  .ca-sports-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+  .ca-sport-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; margin-top: 56px; }
+  .ca-sport-card {
+    background: var(--orange-50); border-radius: var(--radius); padding: 28px 18px;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .ca-sport-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(255,138,31,0.15); }
+  .ca-sport-card .emoji { font-size: 2.4rem; margin-bottom: 12px; }
+  .ca-sport-card h3 { font-size: 1.15rem; color: var(--night); margin-bottom: 6px; }
+  .ca-sport-card p { font-size: 0.9rem; color: var(--slate); line-height: 1.5; }
+
+  /* Features */
+  .ca-features { padding: 110px 32px; background: var(--night); color: white; }
+  .ca-features-inner { max-width: 1100px; margin: 0 auto; }
+  .ca-features .ca-section-title { color: white; }
+  .ca-features .ca-section-sub { color: rgba(255,255,255,0.65); }
+  .ca-feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 56px; }
+  .ca-feature {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius); padding: 28px;
+  }
+  .ca-feature-icon {
+    width: 48px; height: 48px; border-radius: 14px; background: var(--gradient);
+    display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
+  }
+  .ca-feature-icon svg { width: 24px; height: 24px; stroke: white; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .ca-feature h3 { font-size: 1.15rem; margin-bottom: 8px; }
+  .ca-feature p { color: rgba(255,255,255,0.65); line-height: 1.6; font-size: 0.96rem; }
+
+  /* Pricing */
+  .ca-pricing { padding: 110px 32px; background: var(--orange-50); }
+  .ca-pricing-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+  .ca-plans { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 52px; text-align: left; }
+  .ca-plan {
+    background: white; border-radius: 24px; padding: 34px;
+    border: 1px solid var(--orange-100);
+  }
+  .ca-plan.pro { border: 2px solid transparent; background: linear-gradient(white, white) padding-box, var(--gradient) border-box; }
+  .ca-plan h3 { font-size: 1.5rem; color: var(--night); }
+  .ca-plan .tag { color: var(--slate); margin-top: 6px; }
+  .ca-plan ul { list-style: none; margin-top: 22px; }
+  .ca-plan li { padding: 7px 0; display: flex; gap: 10px; color: var(--ink); }
+  .ca-plan li::before { content: '✔'; color: var(--orange); font-weight: 700; }
+
+  /* CTA */
+  .ca-cta { padding: 120px 32px 140px; background: white; position: relative; overflow: hidden; }
+  .ca-cta::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 80px;
+    background: var(--black); clip-path: ellipse(70% 100% at 50% 100%);
+  }
+  .ca-cta-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+  .ca-cta img { width: 96px; height: 96px; border-radius: 22px; margin-bottom: 24px; box-shadow: 0 12px 30px rgba(255,59,48,0.2); }
+  .ca-cta .ca-hero-cta { justify-content: center; }
+
+  /* Footer */
+  .ca-footer { background: var(--black); color: white; padding: 48px 32px; }
+  .ca-footer-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 24px;
+  }
+  .ca-footer-brand { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 1.4rem; }
+  .ca-footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+  .ca-footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.95rem; }
+  .ca-footer-links a:hover { color: white; }
+  .ca-footer-contact { text-align: right; }
+  .ca-footer-contact h4 { font-size: 1.1rem; margin-bottom: 4px; }
+  .ca-footer-contact a { color: rgba(255,255,255,0.7); text-decoration: underline; font-size: 0.95rem; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1000px) {
+    .ca-steps { grid-template-columns: repeat(2, 1fr); gap: 56px 36px; }
+    .ca-sport-grid { grid-template-columns: repeat(3, 1fr); }
+    .ca-feature-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 900px) {
+    .ca-hero-inner { grid-template-columns: 1fr; text-align: center; gap: 56px; }
+    .ca-brand, .ca-hero-cta, .ca-sports { justify-content: center; }
+    .ca-hero-sub { margin-left: auto; margin-right: auto; }
+    .ca-footer-inner { flex-direction: column; text-align: center; }
+    .ca-footer-contact { text-align: center; }
+  }
+  @media (max-width: 600px) {
+    .nav-inner { padding: 12px 20px; }
+    .ca-hero { padding: 110px 16px 64px; }
+    .ca-hero-visual .phone { width: 220px; }
+    .ca-hero-visual .phone.back { width: 190px; top: 40px; }
+    .ca-float-card { right: 0; bottom: 30px; padding: 10px 14px; }
+    .ca-promise, .ca-how, .ca-sports-sec, .ca-features, .ca-pricing { padding: 64px 16px; }
+    .ca-cta { padding: 64px 16px 120px; }
+    .ca-steps { grid-template-columns: 1fr; }
+    .ca-step { text-align: center; }
+    .ca-step .phone { max-width: 230px; }
+    .ca-sport-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .ca-feature-grid, .ca-plans { grid-template-columns: 1fr; }
+    .ca-plan { padding: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Nav linking back to main site -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a class="logo" href="/">
+      <div class="logo-icon">&#9728;&#65039;</div>
+      Happy Path Apps
+    </a>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <div class="nav-dropdown">
+        <a href="/#apps" class="active">Our Apps</a>
+        <div class="nav-menu">
+          <div class="nav-menu-inner">
+            <a href="/onlyBirdies/"><img src="/onlyBirdies/images/onlybirdies-icon.png" alt=""><span class="nav-menu-text"><strong>OnlyBirdies</strong><small>Golf scoring, simplified</small></span></a>
+            <a href="/omilia/"><img src="/omilia/images/omilia-icon.png" alt=""><span class="nav-menu-text"><strong>Omilía</strong><small>Your partner in speech therapy</small></span></a>
+            <a href="/coachassist/" class="active"><img src="/coachassist/images/coachassist-icon.png" alt=""><span class="nav-menu-text"><strong>Coach Assist</strong><small>Fair playing time for youth sports</small></span></a>
+          </div>
+        </div>
+      </div>
+      <a href="/#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="ca-hero">
+  <div class="ca-hero-inner">
+    <div class="ca-hero-text fade-up">
+      <div class="ca-brand">
+        <img src="images/coachassist-icon.png" alt="Coach Assist app icon">
+        <span>Coach Assist</span>
+      </div>
+      <h1>Every kid gets their <span class="grad-text">moment to shine.</span></h1>
+      <p class="ca-hero-sub">Your sideline companion for youth sports. Track playing time live, get smart substitution suggestions, and share fair, transparent reports with parents.</p>
+      <div class="ca-hero-cta">
+        <a href="https://apps.apple.com/app/id6760248122" target="_blank" rel="noopener" class="store-badge" aria-label="Download Coach Assist on the App Store">
+          <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+          <span class="store-badge-text"><small>Download on the</small><strong>App Store</strong></span>
+        </a>
+        <span class="ca-free-note"><strong>Free to try</strong> &mdash; your first team and game are on us.</span>
+      </div>
+      <div class="ca-sports">
+        <span class="ca-sport-chip">&#127936; Basketball</span>
+        <span class="ca-sport-chip">&#9917; Soccer</span>
+        <span class="ca-sport-chip">&#127954; Hockey</span>
+        <span class="ca-sport-chip">&#127944; Football</span>
+        <span class="ca-sport-chip">&#9918; Baseball</span>
+      </div>
+    </div>
+    <div class="ca-hero-visual fade-up" style="transition-delay: 0.15s;">
+      <div class="phone back"><img src="images/report.jpg" width="700" height="1522" alt="Coach Assist playing time report showing minutes for each player"></div>
+      <div class="phone"><img src="images/subs.jpg" width="700" height="1522" alt="Coach Assist live game with suggested substitutions"></div>
+      <div class="ca-float-card" aria-hidden="true">
+        <div class="dot">&#8644;</div>
+        <div><strong>Sub in Nora #14</strong><small>for Ava #10 &middot; 0:40 played</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Promise -->
+<section class="ca-promise">
+  <div class="ca-promise-inner fade-up">
+    <span class="ca-eyebrow">Why Coach Assist</span>
+    <p class="big">Coaching youth sports is a juggling act. Clock, score, matchups, and a bench full of kids who all want to play. Coach Assist keeps track of the minutes so you can <span class="grad-text">focus on coaching.</span></p>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="ca-how" id="how">
+  <div class="ca-how-inner">
+    <div class="fade-up">
+      <span class="ca-eyebrow">How it works</span>
+      <h2 class="ca-section-title">From tip-off to final whistle.</h2>
+    </div>
+    <div class="ca-steps">
+      <div class="ca-step fade-up">
+        <div class="phone"><img src="images/setup.jpg" width="700" height="1522" loading="lazy" alt="Game setup screen with sport, date, quarter length and roster"></div>
+        <div class="ca-step-num">1</div>
+        <h3>Set up the game</h3>
+        <p>Pick your roster, quarters or halves, and period length. Sensible youth defaults for every sport.</p>
+      </div>
+      <div class="ca-step fade-up" style="transition-delay: 0.1s;">
+        <div class="phone"><img src="images/live.jpg" width="700" height="1522" loading="lazy" alt="Live game clock with players on court and their minutes"></div>
+        <div class="ca-step-num">2</div>
+        <h3>Track it live</h3>
+        <p>Run the clock and keep score. Every player&rsquo;s time on court is counted automatically.</p>
+      </div>
+      <div class="ca-step fade-up" style="transition-delay: 0.2s;">
+        <div class="phone"><img src="images/subs.jpg" width="700" height="1522" loading="lazy" alt="Suggested substitutions pairing bench players with players who have the most time"></div>
+        <div class="ca-step-num">3</div>
+        <h3>Sub with confidence</h3>
+        <p>Smart suggestions pair who&rsquo;s played the most with who&rsquo;s waited the longest. Apply one or all with a tap.</p>
+      </div>
+      <div class="ca-step fade-up" style="transition-delay: 0.3s;">
+        <div class="phone"><img src="images/report.jpg" width="700" height="1522" loading="lazy" alt="Playing time report with final score and per-player minutes"></div>
+        <div class="ca-step-num">4</div>
+        <h3>Share the report</h3>
+        <p>A clean playing time report for every game, ready to share with parents in seconds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sports -->
+<section class="ca-sports-sec">
+  <div class="ca-sports-inner">
+    <div class="fade-up">
+      <span class="ca-eyebrow">Five sports, one app</span>
+      <h2 class="ca-section-title">Built for the way your sport is played.</h2>
+      <p class="ca-section-sub">Coach Assist speaks your sport&rsquo;s language &mdash; on court, on ice, or on the field.</p>
+    </div>
+    <div class="ca-sport-grid fade-up">
+      <div class="ca-sport-card"><div class="emoji">&#127936;</div><h3>Basketball</h3><p>Starting five, quarters or halves, minutes played</p></div>
+      <div class="ca-sport-card"><div class="emoji">&#9917;</div><h3>Soccer</h3><p>Starting eleven, halves, minutes played</p></div>
+      <div class="ca-sport-card"><div class="emoji">&#127954;</div><h3>Hockey</h3><p>Starting six, periods, ice time</p></div>
+      <div class="ca-sport-card"><div class="emoji">&#127944;</div><h3>Football</h3><p>Starting eleven, quarters, snaps played</p></div>
+      <div class="ca-sport-card"><div class="emoji">&#9918;</div><h3>Baseball</h3><p>Starting nine, innings played</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="ca-features">
+  <div class="ca-features-inner">
+    <div class="fade-up">
+      <span class="ca-eyebrow">Everything on the sideline</span>
+      <h2 class="ca-section-title">The assistant coach in your pocket.</h2>
+      <p class="ca-section-sub">Simple enough to run one-handed during a game. Thoughtful enough to handle the whole season.</p>
+    </div>
+    <div class="ca-feature-grid">
+      <div class="ca-feature fade-up">
+        <div class="ca-feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg></div>
+        <h3>Fair playing time</h3>
+        <p>See exactly how long every player has been on and off, updated live as the clock runs.</p>
+      </div>
+      <div class="ca-feature fade-up" style="transition-delay: 0.05s;">
+        <div class="ca-feature-icon"><svg viewBox="0 0 24 24"><path d="M7 4L3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"/></svg></div>
+        <h3>Smart substitutions</h3>
+        <p>Up to three suggested swaps based on playing time imbalance, so the bench never gets forgotten.</p>
+      </div>
+      <div class="ca-feature fade-up" style="transition-delay: 0.1s;">
+        <div class="ca-feature-icon"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div>
+        <h3>Game reports</h3>
+        <p>Per-player minutes, snaps or innings plus the final score, shareable as an image.</p>
+      </div>
+      <div class="ca-feature fade-up">
+        <div class="ca-feature-icon"><svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg></div>
+        <h3>Message the team</h3>
+        <p>Text or email every parent at once through your phone&rsquo;s Messages and Mail apps.</p>
+      </div>
+      <div class="ca-feature fade-up" style="transition-delay: 0.05s;">
+        <div class="ca-feature-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
+        <h3>Schedule sharing</h3>
+        <p>Turn your season into a tidy schedule graphic with upcoming games and past results.</p>
+      </div>
+      <div class="ca-feature fade-up" style="transition-delay: 0.1s;">
+        <div class="ca-feature-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5M17 4.5a3.5 3.5 0 0 1 0 7M19 14.8c1.4.8 2.2 2.6 2.5 5.2"/></svg></div>
+        <h3>Share your roster</h3>
+        <p>Send your team to an assistant coach with one link &mdash; players and parent contacts included.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="ca-pricing">
+  <div class="ca-pricing-inner">
+    <div class="fade-up">
+      <span class="ca-eyebrow">Pricing</span>
+      <h2 class="ca-section-title">Try it free. Go Pro for the season.</h2>
+    </div>
+    <div class="ca-plans">
+      <div class="ca-plan fade-up">
+        <h3>Free</h3>
+        <p class="tag">See how it feels on the sideline</p>
+        <ul>
+          <li>Your first team</li>
+          <li>Your first game</li>
+          <li>Live playing time tracking</li>
+          <li>Playing time report</li>
+        </ul>
+      </div>
+      <div class="ca-plan pro fade-up" style="transition-delay: 0.1s;">
+        <h3><span class="grad-text">Pro</span></h3>
+        <p class="tag">Yearly subscription or one-time lifetime unlock</p>
+        <ul>
+          <li>Unlimited teams</li>
+          <li>Unlimited games all season</li>
+          <li>Full playing time reports</li>
+          <li>Smart substitution suggestions</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="ca-cta">
+  <div class="ca-cta-inner fade-up">
+    <img src="images/coachassist-icon.png" alt="">
+    <h2 class="ca-section-title">Ready to coach?</h2>
+    <p class="ca-section-sub">Create your first team and add your players. You&rsquo;ll be tracking playing time in no time.</p>
+    <div class="ca-hero-cta">
+      <a href="https://apps.apple.com/app/id6760248122" target="_blank" rel="noopener" class="btn btn-gradient">Get Coach Assist &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<div class="ca-footer">
+  <div class="ca-footer-inner">
+    <div class="ca-footer-brand">Happy Path Apps</div>
+    <div class="ca-footer-links">
+      <a href="/">Home</a>
+      <a href="/onlyBirdies/">OnlyBirdies</a>
+      <a href="/omilia/">Omilía</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="/delete-account.html">Delete Account</a>
+    </div>
+    <div class="ca-footer-contact">
+      <h4>Contact</h4>
+      <a href="mailto:David@happypathapps.co">David@happypathapps.co</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleMenu() {
+    document.querySelector('.hamburger').classList.toggle('open');
+    document.querySelector('.nav-links').classList.toggle('open');
+    document.getElementById('navbar').classList.toggle('menu-open');
+  }
+
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
