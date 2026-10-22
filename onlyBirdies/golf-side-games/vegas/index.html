@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vegas Golf Game: Rules, Scoring &amp; Birdie Flips</title>
+<meta name="description" content="Las Vegas golf game rules explained: pairing team scores into two-digit numbers, birdie flips, how points add up, and a worked example.">
+<link rel="canonical" href="https://happypathapps.co/onlyBirdies/golf-side-games/vegas/">
+<link rel="icon" type="image/png" href="/onlyBirdies/images/onlybirdies-icon.png">
+<meta name="apple-itunes-app" content="app-id=6749419654">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Happy Path Apps">
+<meta property="og:title" content="Vegas Golf Game: Rules, Scoring &amp; Birdie Flips">
+<meta property="og:description" content="Las Vegas golf game rules explained: pairing team scores into two-digit numbers, birdie flips, how points add up, and a worked example.">
+<meta property="og:url" content="https://happypathapps.co/onlyBirdies/golf-side-games/vegas/">
+<meta property="og:image" content="https://happypathapps.co/onlyBirdies/images/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vegas Golf Game: Rules, Scoring &amp; Birdie Flips">
+<meta name="twitter:description" content="Las Vegas golf game rules explained: pairing team scores into two-digit numbers, birdie flips, how points add up, and a worked example.">
+<meta name="twitter:image" content="https://happypathapps.co/onlyBirdies/images/og.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "How to play Vegas in golf", "description": "Las Vegas golf game rules explained: pairing team scores into two-digit numbers, birdie flips, how points add up, and a worked example.", "image": "https://happypathapps.co/onlyBirdies/images/og.jpg", "dateModified": "2026-10-21", "datePublished": "2026-10-21", "author": {"@type": "Organization", "name": "Happy Path Apps", "url": "https://happypathapps.co/"}, "publisher": {"@type": "Organization", "name": "Happy Path Apps", "logo": {"@type": "ImageObject", "url": "https://happypathapps.co/images/logo.png"}}, "mainEntityOfPage": "https://happypathapps.co/onlyBirdies/golf-side-games/vegas/"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "OnlyBirdies", "item": "https://happypathapps.co/onlyBirdies/"}, {"@type": "ListItem", "position": 2, "name": "Golf Side Games", "item": "https://happypathapps.co/onlyBirdies/golf-side-games/"}, {"@type": "ListItem", "position": 3, "name": "Vegas", "item": "https://happypathapps.co/onlyBirdies/golf-side-games/vegas/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do you make a team number in Vegas golf?", "acceptedAnswer": {"@type": "Answer", "text": "Put the two partners’ scores together with the lower score first. A 4 and a 5 make 45. The lower team number wins the hole by the difference."}}, {"@type": "Question", "name": "What is the birdie flip in Vegas?", "acceptedAnswer": {"@type": "Answer", "text": "If a player makes a birdie, the other team’s number is reversed so the higher score comes first. A 45 becomes a 54, which makes the birdie worth more points."}}, {"@type": "Question", "name": "What happens if someone scores 10 or more in Vegas?", "acceptedAnswer": {"@type": "Answer", "text": "The usual rule is that the double-digit score goes first, so a 4 and a 10 make 104. Some groups cap scores at double par instead."}}, {"@type": "Question", "name": "How much should you play Vegas for?", "acceptedAnswer": {"@type": "Answer", "text": "Because points add up quickly, most groups play for small stakes like 10 or 25 cents a point, or cap the points on any one hole."}}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --green: #4CBB3C;
+    --forest: #0E3B0C;
+    --green-50: #F1FAEE;
+    --green-100: #D9F1D1;
+    --gradient: linear-gradient(135deg, var(--green), var(--forest));
+    --black: #000000;
+    --night: #0F172A;
+    --ink: #1E293B;
+    --slate: #64748B;
+    --cloud: #F5F5F5;
+    --white: #FFFFFF;
+    --coral: #FF6B5A;
+    --sunbeam: #FFD233;
+    --radius: 20px;
+    --radius-sm: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    background: var(--white);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 { font-family: 'Bricolage Grotesque', sans-serif; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    transition: box-shadow 0.3s;
+  }
+  nav.menu-open {
+    bottom: 0; background: #ffffff;
+  }
+  nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 32px;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800; font-size: 1.35rem; color: var(--night);
+    cursor: pointer; text-decoration: none;
+  }
+  .logo-icon {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--sunbeam), var(--coral));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; color: white;
+    box-shadow: 0 4px 12px rgba(255,107,90,0.35);
+  }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-links a {
+    text-decoration: none; color: var(--slate);
+    font-weight: 500; font-size: 0.95rem;
+    padding: 8px 18px; border-radius: 50px;
+    transition: all 0.25s; cursor: pointer;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--night); background: var(--cloud);
+  }
+
+  /* Our Apps dropdown */
+  .nav-dropdown { position: relative; }
+  .nav-dropdown > a { display: inline-flex; align-items: center; gap: 6px; }
+  .nav-dropdown > a::after {
+    content: ''; width: 6px; height: 6px; margin-top: -3px;
+    border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg); transition: transform 0.2s;
+  }
+  .nav-dropdown:hover > a::after, .nav-dropdown:focus-within > a::after { transform: rotate(-135deg); margin-top: 3px; }
+  .nav-menu {
+    position: absolute; top: 100%; left: 50%; padding-top: 10px;
+    transform: translate(-50%, 6px); opacity: 0; visibility: hidden;
+    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+  }
+  .nav-dropdown:hover .nav-menu, .nav-dropdown:focus-within .nav-menu {
+    opacity: 1; visibility: visible; transform: translate(-50%, 0);
+  }
+  .nav-menu-inner {
+    background: white; border-radius: 16px; padding: 8px; min-width: 300px;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 16px 40px rgba(15,23,42,0.14);
+  }
+  .nav-links .nav-menu a {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px; border-radius: 12px; color: var(--night);
+  }
+  .nav-links .nav-menu a:hover, .nav-links .nav-menu a.active { background: var(--cloud); }
+  .nav-menu img {
+    width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+  }
+  .nav-menu-text { display: flex; flex-direction: column; line-height: 1.25; }
+  .nav-menu-text strong { font-weight: 600; font-size: 0.98rem; }
+  .nav-menu-text small { color: var(--slate); font-size: 0.82rem; white-space: nowrap; }
+  .nav-menu-label {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--slate); padding: 12px 12px 4px; margin-top: 4px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+
+  /* Hamburger */
+  .hamburger {
+    display: none; background: none; border: none; cursor: pointer;
+    padding: 8px; flex-direction: column; gap: 5px; z-index: 101;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px; background: var(--night);
+    border-radius: 2px; transition: all 0.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  @media (max-width: 700px) {
+    .hamburger { display: flex; z-index: 101; }
+    .nav-links {
+      display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px; background: #ffffff;
+    }
+    nav.menu-open { bottom: 0; }
+    .nav-links.open { display: flex; }
+    .nav-links a { font-size: 1.4rem; padding: 16px 40px; color: var(--night); }
+    .nav-links a.active { background: var(--cloud); }
+    .nav-dropdown { display: flex; flex-direction: column; align-items: center; }
+    .nav-dropdown > a::after { display: none; }
+    .nav-menu { position: static; transform: none; opacity: 1; visibility: visible; padding-top: 0; }
+    .nav-dropdown:hover .nav-menu, .nav-dropdown:focus-within .nav-menu { transform: none; }
+    .nav-menu-inner { box-shadow: none; border: none; min-width: 0; padding: 0; }
+    .nav-links .nav-menu a { font-size: 1.05rem; padding: 8px 16px; }
+    .nav-menu img { width: 32px; height: 32px; border-radius: 8px; }
+    .nav-menu-text small { display: none; }
+    .nav-menu-label { text-align: center; border-top: none; padding-top: 8px; }
+  }
+
+  /* ─── SHARED ─── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 16px 36px; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700; font-size: 1.05rem;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .btn-gradient {
+    background: var(--gradient); color: white;
+    box-shadow: 0 6px 24px rgba(14,59,12,0.3);
+  }
+  .btn-gradient:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(14,59,12,0.4); }
+
+  .fade-up {
+    opacity: 0; transform: translateY(30px);
+    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  .grad-text {
+    background: var(--gradient);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  .store-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--black); color: white; text-decoration: none;
+    padding: 10px 22px 10px 18px; border-radius: 12px;
+    border: 1px solid #A6A6A6;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .store-badge:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+  .store-badge svg { width: 26px; height: 32px; fill: white; flex-shrink: 0; }
+  .store-badge-text { display: flex; flex-direction: column; line-height: 1.1; text-align: left; }
+  .store-badge-text small { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2px; }
+  .store-badge-text strong { font-size: 1.35rem; font-weight: 600; letter-spacing: -0.3px; }
+
+  .phone {
+    position: relative; border-radius: 46px; padding: 10px;
+    background: #111; box-shadow: 0 30px 60px rgba(15,23,42,0.22), inset 0 0 0 2px #2a2a2a;
+  }
+  .phone img {
+    display: block; width: 100%; height: auto; border-radius: 37px;
+    aspect-ratio: 1206 / 2622;
+  }
+
+  .phone {
+    position: relative; border-radius: 46px; padding: 10px;
+    background: #111; box-shadow: 0 30px 60px rgba(15,23,42,0.22), inset 0 0 0 2px #2a2a2a;
+  }
+  .phone img {
+    display: block; width: 100%; height: auto; border-radius: 37px;
+    aspect-ratio: 603 / 1311;
+  }
+
+  .ob-section-title {
+    font-size: clamp(2rem, 4vw, 2.9rem); font-weight: 800; line-height: 1.1;
+    color: var(--night); letter-spacing: -0.5px;
+  }
+  .ob-section-sub { color: var(--slate); font-size: 1.12rem; line-height: 1.65; margin-top: 14px; }
+  .ob-eyebrow {
+    display: inline-block; font-weight: 700; font-size: 0.82rem; letter-spacing: 1.2px;
+    text-transform: uppercase; color: var(--green); margin-bottom: 12px;
+  }
+
+  /* Footer */
+  .ob-footer { background: var(--black); color: white; padding: 48px 32px; }
+  .ob-footer-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 24px;
+  }
+  .ob-footer-brand { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 1.4rem; }
+  .ob-footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+  .ob-footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.95rem; }
+  .ob-footer-links a:hover { color: white; }
+  .ob-footer-contact { text-align: right; }
+  .ob-footer-contact h4 { font-size: 1.1rem; margin-bottom: 4px; }
+  .ob-footer-contact a { color: rgba(255,255,255,0.7); text-decoration: underline; font-size: 0.95rem; }
+
+
+  /* ══════════════════════════════════════
+     SIDE GAME GUIDES
+     ══════════════════════════════════════ */
+  .sg-hero {
+    position: relative; overflow: hidden; padding: 130px 32px 70px;
+    background: linear-gradient(180deg, #F8FCF6 0%, var(--green-50) 70%, #FFFFFF 100%);
+  }
+  .sg-hero-inner { max-width: 860px; margin: 0 auto; }
+  .sg-crumbs { display: flex; flex-wrap: wrap; gap: 6px; font-size: 0.9rem; color: var(--slate); margin-bottom: 22px; }
+  .sg-crumbs a { color: var(--slate); text-decoration: none; }
+  .sg-crumbs a:hover { color: var(--forest); text-decoration: underline; }
+  .sg-hero-title { display: flex; align-items: center; gap: 18px; }
+  .sg-hero-title img { width: 64px; height: 64px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 8px 24px rgba(14,59,12,0.15); }
+  .sg-hero h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 800; line-height: 1.05; color: var(--night); letter-spacing: -1px; }
+  .sg-lede { font-size: 1.18rem; color: var(--slate); line-height: 1.7; margin-top: 20px; }
+  .sg-facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 30px; }
+  .sg-fact { background: white; border: 1px solid var(--green-100); border-radius: 16px; padding: 14px 16px; }
+  .sg-fact small { display: block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--slate); }
+  .sg-fact strong { display: block; margin-top: 4px; color: var(--night); font-size: 1rem; }
+
+  .sg-body { padding: 40px 32px 90px; }
+  .sg-article { max-width: 760px; margin: 0 auto; font-size: 1.08rem; line-height: 1.75; color: var(--ink); }
+  .sg-article h2 { font-size: 1.75rem; color: var(--night); margin: 48px 0 14px; letter-spacing: -0.3px; }
+  .sg-article h3 { font-size: 1.2rem; color: var(--night); margin: 28px 0 8px; }
+  .sg-article p { margin-top: 14px; }
+  .sg-article ul, .sg-article ol { margin: 14px 0 0 22px; }
+  .sg-article li { margin-top: 8px; }
+  .sg-article strong { color: var(--night); }
+  .sg-article a { color: var(--forest); font-weight: 600; text-decoration-color: rgba(14,59,12,0.3); text-underline-offset: 3px; }
+  .sg-article a:hover { text-decoration-color: currentColor; }
+  .sg-table-wrap { overflow-x: auto; margin-top: 20px; border: 1px solid var(--green-100); border-radius: 16px; }
+  .sg-article table { width: 100%; border-collapse: collapse; font-size: 0.98rem; }
+  .sg-article th, .sg-article td { padding: 11px 14px; text-align: left; border-bottom: 1px solid var(--green-100); white-space: nowrap; }
+  .sg-article th { background: var(--green-50); color: var(--night); font-weight: 700; }
+  .sg-article tr:last-child td { border-bottom: none; }
+  .sg-article td.win { color: var(--forest); font-weight: 700; }
+  .sg-callout {
+    margin-top: 24px; padding: 18px 22px; border-radius: 16px;
+    background: var(--green-50); border-left: 4px solid var(--green);
+  }
+  .sg-callout p:first-child { margin-top: 0; }
+
+  .sg-faq details { border-bottom: 1px solid var(--green-100); padding: 16px 0; }
+  .sg-faq summary { cursor: pointer; font-weight: 700; color: var(--night); list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  .sg-faq summary::-webkit-details-marker { display: none; }
+  .sg-faq summary::after { content: '+'; color: var(--green); font-size: 1.3rem; line-height: 1; }
+  .sg-faq details[open] summary::after { content: '\2212'; }
+  .sg-faq details p { margin-top: 10px; }
+
+  .sg-cta {
+    margin: 56px auto 0; max-width: 760px; padding: 34px; border-radius: 24px; text-align: center;
+    background: var(--night); color: white; position: relative; overflow: hidden;
+  }
+  .sg-cta::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 15% 20%, rgba(76,187,60,0.35), transparent 50%);
+  }
+  .sg-cta > * { position: relative; }
+  .sg-cta img.icon { width: 64px; height: 64px; border-radius: 15px; }
+  .sg-cta h2 { color: white; font-size: 1.7rem; margin-top: 14px; }
+  .sg-cta p { color: rgba(255,255,255,0.72); margin-top: 10px; line-height: 1.6; }
+  .sg-cta .badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 22px; }
+
+  .sg-more { padding: 80px 32px 100px; background: var(--green-50); }
+  .sg-more-inner { max-width: 1100px; margin: 0 auto; }
+  .sg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; margin-top: 32px; }
+  .sg-card {
+    display: block; background: white; border: 1px solid var(--green-100); border-radius: var(--radius);
+    padding: 24px; text-decoration: none; color: inherit; transition: transform 0.25s, box-shadow 0.25s;
+  }
+  a.sg-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(14,59,12,0.1); }
+  .sg-card img { width: 52px; height: 52px; border-radius: 50%; }
+  .sg-card h3 { font-size: 1.15rem; color: var(--night); margin-top: 12px; }
+  .sg-card p { font-size: 0.93rem; color: var(--slate); line-height: 1.55; margin-top: 6px; }
+  .sg-card .go { display: inline-block; margin-top: 12px; font-weight: 700; font-size: 0.9rem; color: var(--forest); }
+  .sg-card.soon { background: transparent; border-style: dashed; }
+  .sg-card.soon .go { color: var(--slate); font-weight: 600; }
+
+  @media (max-width: 760px) {
+    .sg-facts { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .nav-inner { padding: 12px 20px; }
+    .sg-hero { padding: 104px 16px 48px; }
+    .sg-body { padding: 28px 16px 64px; }
+    .sg-more { padding: 56px 16px 72px; }
+    .sg-cta { padding: 26px 20px; }
+    .sg-hero-title img { width: 52px; height: 52px; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a class="logo" href="/">
+      <div class="logo-icon">&#9728;&#65039;</div>
+      Happy Path Apps
+    </a>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <div class="nav-dropdown">
+        <a href="/#apps" class="active">Our Apps</a>
+        <div class="nav-menu">
+          <div class="nav-menu-inner">
+            <a href="/omilia/"><img src="/omilia/images/omilia-icon.png" alt=""><span class="nav-menu-text"><strong>Omilía</strong><small>Your partner in speech therapy</small></span></a>
+            <a href="/onlyBirdies/"><img src="/onlyBirdies/images/onlybirdies-icon.png" alt=""><span class="nav-menu-text"><strong>OnlyBirdies</strong><small>Golf scoring, simplified</small></span></a>
+            <a href="/coachassist/"><img src="/coachassist/images/coachassist-icon.png" alt=""><span class="nav-menu-text"><strong>Coach Assist</strong><small>Fair playing time for youth sports</small></span></a>
+            <div class="nav-menu-label">Client work</div>
+            <a href="/within/"><img src="/within/images/within-icon.png" alt=""><span class="nav-menu-text"><strong>Within</strong><small>Memorize Scripture, learn its context</small></span></a>
+          </div>
+        </div>
+      </div>
+      <a href="/#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<section class="sg-hero">
+  <div class="sg-hero-inner fade-up">
+    <div class="sg-crumbs" role="navigation" aria-label="Breadcrumb"><a href="/onlyBirdies/">OnlyBirdies</a> <span>/</span> <a href="/onlyBirdies/golf-side-games/">Golf side games</a> <span>/</span> <span>Vegas</span></div>
+    <div class="sg-hero-title"><img src="/onlyBirdies/images/game-vegas.jpg" alt=""><h1>How to play Vegas in golf</h1></div>
+    <p class="sg-lede">Vegas (or Las Vegas) is a fast-moving team game for a foursome. Each team turns its two scores into a two-digit number, and the lower number wins the difference in points &mdash; so the swings can get big in a hurry.</p>
+    <div class="sg-facts"><div class="sg-fact"><small>Players</small><strong>4, in two teams of 2</strong></div><div class="sg-fact"><small>Format</small><strong>Team, hole by hole</strong></div><div class="sg-fact"><small>Scoring</small><strong>Points</strong></div><div class="sg-fact"><small>Difficulty</small><strong>Medium</strong></div></div>
+  </div>
+</section>
+
+<section class="sg-body">
+  <article class="sg-article">
+
+<h2>How Vegas works</h2>
+<ol>
+  <li><strong>Split into two teams of two.</strong> Partners can stay the same all round or rotate every six holes so everyone plays with everyone.</li>
+  <li><strong>Make your team number.</strong> On each hole, put the two scores together with the <strong>lower score first</strong>. A 4 and a 5 make <strong>45</strong>; a 3 and a 6 make <strong>36</strong>.</li>
+  <li><strong>Lower number wins.</strong> The team with the lower number wins the difference in points. 45 against 56 is an 11-point hole.</li>
+  <li><strong>Settle up at the end.</strong> Add up each team&rsquo;s points and pay the difference at an agreed value per point.</li>
+</ol>
+<div class="sg-callout"><p><strong>Keep the stakes small.</strong> Points add up fast in Vegas &mdash; a single hole can swing 30 points or more &mdash; so most groups play for dimes or quarters a point, or set a cap per hole.</p></div>
+
+<h2>The birdie flip</h2>
+<p>The rule that makes Vegas famous: if a player makes a <strong>birdie</strong>, the <em>other</em> team&rsquo;s number is flipped so the higher score goes first. That turns a 45 into a 54 and makes the birdie worth a lot more.</p>
+<p>Many groups also flip for an eagle (some double it), and agree that a birdie only flips if the other team didn&rsquo;t make one too.</p>
+
+<h2>Scores of 10 or more</h2>
+<p>If a player makes double digits, the usual rule is that the big number goes first: a 4 and a 10 become <strong>104</strong>, not 410. Some groups cap a blow-up hole at double par to keep things friendly.</p>
+
+<h2>A worked example</h2>
+<p>Anne &amp; Ben play Cal &amp; Dev for 10 cents a point.</p>
+<div class="sg-table-wrap"><table>
+  <thead><tr><th>Hole</th><th>Anne &amp; Ben</th><th>Cal &amp; Dev</th><th>Result</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>4, 5 &rarr; <strong>45</strong></td><td>5, 6 &rarr; <strong>56</strong></td><td class="win">Anne &amp; Ben +11</td></tr>
+    <tr><td>2</td><td>4, 4 &rarr; <strong>44</strong></td><td>4, 5 &rarr; <strong>45</strong></td><td class="win">Anne &amp; Ben +1</td></tr>
+    <tr><td>3</td><td>5, 6 &rarr; flipped to <strong>65</strong></td><td>3 (birdie), 5 &rarr; <strong>35</strong></td><td class="win">Cal &amp; Dev +30</td></tr>
+  </tbody>
+</table></div>
+<p>After three holes Cal &amp; Dev lead 30 to 12, or 18 points. At 10 cents a point, that&rsquo;s $1.80 &mdash; usually split so each player on the losing team pays their opponent 90 cents.</p>
+
+<h2>Variations</h2>
+<ul>
+  <li><strong>Rotating partners:</strong> switch teams after holes 6 and 12 so nobody is stuck with the same partner.</li>
+  <li><strong>Net Vegas:</strong> apply handicap strokes before building the numbers.</li>
+  <li><strong>No flips:</strong> skip the birdie rule for a calmer game.</li>
+</ul>
+
+    <h2>Vegas FAQ</h2>
+    <div class="sg-faq">
+<details><summary>How do you make a team number in Vegas golf?</summary><p>Put the two partners’ scores together with the lower score first. A 4 and a 5 make 45. The lower team number wins the hole by the difference.</p></details>
+<details><summary>What is the birdie flip in Vegas?</summary><p>If a player makes a birdie, the other team’s number is reversed so the higher score comes first. A 45 becomes a 54, which makes the birdie worth more points.</p></details>
+<details><summary>What happens if someone scores 10 or more in Vegas?</summary><p>The usual rule is that the double-digit score goes first, so a 4 and a 10 make 104. Some groups cap scores at double par instead.</p></details>
+<details><summary>How much should you play Vegas for?</summary><p>Because points add up quickly, most groups play for small stakes like 10 or 25 cents a point, or cap the points on any one hole.</p></details>
+    </div>
+  </article>
+
+  <div class="sg-cta fade-up">
+    <img class="icon" src="/onlyBirdies/images/onlybirdies-icon.png" alt="">
+    <h2>Play Vegas without the math</h2>
+    <p>OnlyBirdies keeps score for your whole group, tracks Vegas and your other side games as scores go in, and tells everyone who owes whom at the end of the round.</p>
+    <div class="badges">
+        <a href="https://apps.apple.com/us/app/onlybirdies-golf-scorecard/id6749419654" target="_blank" rel="noopener" class="store-badge" aria-label="Download OnlyBirdies on the App Store"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg><span class="store-badge-text"><small>Download on the</small><strong>App Store</strong></span></a>
+        <a href="https://play.google.com/store/apps/details?id=com.happypathapps.golfpad" target="_blank" rel="noopener" class="store-badge" aria-label="Get OnlyBirdies on Google Play"><svg viewBox="0 0 512 512" aria-hidden="true" style="width:26px;height:28px;"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/></svg><span class="store-badge-text"><small>Get it on</small><strong>Google Play</strong></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sg-more">
+  <div class="sg-more-inner">
+    <span class="ob-eyebrow">More side games</span>
+    <h2 class="ob-section-title">Try another game</h2>
+    <div class="sg-grid">
+      <a class="sg-card" href="/onlyBirdies/golf-side-games/nassau/"><img src="/onlyBirdies/images/game-nassau.jpg" alt=""><h3>Nassau</h3><p>Three bets in one: the front nine, the back nine and the full 18.</p><span class="go">Read the rules &rarr;</span></a>
+      <a class="sg-card" href="/onlyBirdies/golf-side-games/skins/"><img src="/onlyBirdies/images/game-skins.jpg" alt=""><h3>Skins</h3><p>Win a hole outright to take the skin. Ties carry the pot to the next hole.</p><span class="go">Read the rules &rarr;</span></a>
+      <a class="sg-card" href="/onlyBirdies/golf-side-games/wolf/"><img src="/onlyBirdies/images/game-wolf.jpg" alt=""><h3>Wolf</h3><p>A rotating Wolf picks a partner after each drive, or goes it alone for double.</p><span class="go">Read the rules &rarr;</span></a>
+      <a class="sg-card" href="/onlyBirdies/golf-side-games/snake/"><img src="/onlyBirdies/images/game-snake.jpg" alt=""><h3>Snake</h3><p>Three-putt and you hold the snake. Whoever holds it at the end pays up.</p><span class="go">Read the rules &rarr;</span></a>
+      <a class="sg-card" href="/onlyBirdies/golf-side-games/nine-point/"><img src="/onlyBirdies/images/game-nine-point.jpg" alt=""><h3>9-Point</h3><p>Three players split nine points on every hole based on their scores.</p><span class="go">Read the rules &rarr;</span></a>
+      <a class="sg-card" href="/onlyBirdies/golf-side-games/dots/"><img src="/onlyBirdies/images/game-dots.jpg" alt=""><h3>Dots</h3><p>Earn points for birdies, sandies, greenies and other good shots.</p><span class="go">Read the rules &rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<div class="ob-footer">
+  <div class="ob-footer-inner">
+    <div class="ob-footer-brand">Happy Path Apps</div>
+    <div class="ob-footer-links">
+      <a href="/">Home</a>
+      <a href="/onlyBirdies/">OnlyBirdies</a>
+      <a href="/omilia/">Omilía</a>
+      <a href="/coachassist/">Coach Assist</a>
+      <a href="/onlyBirdies/privacy-policy.html">Privacy Policy</a>
+      <a href="/delete-account.html">Delete Account</a>
+    </div>
+    <div class="ob-footer-contact">
+      <h4>Contact</h4>
+      <a href="mailto:David@happypathapps.co">David@happypathapps.co</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleMenu() {
+    document.querySelector('.hamburger').classList.toggle('open');
+    document.querySelector('.nav-links').classList.toggle('open');
+    document.getElementById('navbar').classList.toggle('menu-open');
+  }
+
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

@@ -333,6 +333,9 @@
     border: 1px solid var(--green-100);
     transition: transform 0.25s, box-shadow 0.25s;
   }
+  a.ob-game-card { display: block; color: inherit; text-decoration: none; }
+  .ob-games-link { display: inline-block; margin-top: 32px; font-weight: 700; color: var(--forest); text-decoration: none; }
+  .ob-games-link:hover { text-decoration: underline; }
   .ob-game-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(14,59,12,0.1); }
   .ob-game-card img { width: 56px; height: 56px; border-radius: 50%; margin-bottom: 14px; }
   .ob-game-card h3 { font-size: 1.15rem; color: var(--night); margin-bottom: 6px; }
@@ -552,15 +555,16 @@
       <p class="ob-section-sub">Play one or stack a few. OnlyBirdies knows the rules so nobody has to argue about them.</p>
     </div>
     <div class="ob-game-grid fade-up">
-      <div class="ob-game-card"><img src="images/game-nassau.jpg" alt=""><h3>Nassau</h3><p>Front nine, back nine, and overall</p></div>
-      <div class="ob-game-card"><img src="images/game-skins.jpg" alt=""><h3>Skins</h3><p>Win the hole outright, take the skin</p></div>
-      <div class="ob-game-card"><img src="images/game-wolf.jpg" alt=""><h3>Wolf</h3><p>Pick a partner or go lone wolf</p></div>
-      <div class="ob-game-card"><img src="images/game-vegas.jpg" alt=""><h3>Vegas</h3><p>Team scores paired into big numbers</p></div>
-      <div class="ob-game-card"><img src="images/game-snake.jpg" alt=""><h3>Snake</h3><p>Last one to three-putt pays</p></div>
-      <div class="ob-game-card"><img src="images/game-nine-point.jpg" alt=""><h3>9-Point</h3><p>Nine points split on every hole</p></div>
-      <div class="ob-game-card"><img src="images/game-dots.jpg" alt=""><h3>Dots</h3><p>Birdies, sandies, greenies and more</p></div>
-      <div class="ob-game-card more"><h3>Stack them</h3><p>Run several games in the same round</p></div>
+      <a class="ob-game-card" href="golf-side-games/nassau/"><img src="images/game-nassau.jpg" alt=""><h3>Nassau</h3><p>Front nine, back nine, and overall</p></a>
+      <a class="ob-game-card" href="golf-side-games/skins/"><img src="images/game-skins.jpg" alt=""><h3>Skins</h3><p>Win the hole outright, take the skin</p></a>
+      <a class="ob-game-card" href="golf-side-games/wolf/"><img src="images/game-wolf.jpg" alt=""><h3>Wolf</h3><p>Pick a partner or go lone wolf</p></a>
+      <a class="ob-game-card" href="golf-side-games/vegas/"><img src="images/game-vegas.jpg" alt=""><h3>Vegas</h3><p>Team scores paired into big numbers</p></a>
+      <a class="ob-game-card" href="golf-side-games/snake/"><img src="images/game-snake.jpg" alt=""><h3>Snake</h3><p>Last one to three-putt pays</p></a>
+      <a class="ob-game-card" href="golf-side-games/nine-point/"><img src="images/game-nine-point.jpg" alt=""><h3>9-Point</h3><p>Nine points split on every hole</p></a>
+      <a class="ob-game-card" href="golf-side-games/dots/"><img src="images/game-dots.jpg" alt=""><h3>Dots</h3><p>Birdies, sandies, greenies and more</p></a>
+      <a class="ob-game-card more" href="golf-side-games/"><h3>Stack them</h3><p>Run several games in the same round</p></a>
     </div>
+    <a class="ob-games-link" href="golf-side-games/">How each side game works &rarr;</a>
   </div>
 </section>
 
