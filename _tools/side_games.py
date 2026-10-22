@@ -188,7 +188,8 @@ ARTICLES['nassau'] = dict(
   <li><strong>Automatic press (&ldquo;2-down auto&rdquo;):</strong> a new bet starts automatically whenever a player falls 2 holes behind in any active bet.</li>
   <li><strong>Pressing a press:</strong> if you fall 2 down in a press, it can be pressed again &mdash; agree on a limit before you tee off.</li>
 </ul>
-<p><strong>Example:</strong> Joe is 2 down after hole 5 and presses. A new $5 bet covers holes 6&ndash;9. Joe wins three of those four holes, so he wins the press even though he still loses the front nine overall.</p>
+<div class="sg-callout"><p><strong>Presses in OnlyBirdies:</strong> call a press manually whenever you want, or turn on automatic presses and set how many holes down triggers one. OnlyBirdies tracks every press alongside the front, back and overall, and includes them when it settles the bets.</p></div>
+<p><strong>Example:</strong> Joe is 2 down after hole 5 and presses. A new $5 bet covers holes 6&ndash;9. Joe wins two of those holes and halves the other two. He wins the press 2 up, and the front nine finishes all square &mdash; a push &mdash; so the press is the only front-nine money that changes hands.</p>
 
 <h2>Playing a Nassau with handicaps</h2>
 <p>For a fair game between players of different abilities, use net scores. Take the difference between the two players&rsquo; course handicaps; the higher-handicap player gets that many strokes, applied on the hardest holes by handicap index (the &ldquo;HCP&rdquo; row on the scorecard).</p>
@@ -196,11 +197,12 @@ ARTICLES['nassau'] = dict(
 <h2>Four-ball Nassau</h2>
 <p>With four players, split into two teams of two and play best ball: each team takes its lower score on every hole. Everything else &mdash; front, back, overall and presses &mdash; works the same way.</p>
 """,
+    cta=('Play a Nassau without the math', 'OnlyBirdies tracks the front, back and overall as scores go in, handles manual or automatic presses, and tells everyone who owes whom at the end of the round.'),
     faq=[
         ('How much is a $5 Nassau?', 'A $5 Nassau is three $5 bets: front nine, back nine and overall. Without presses, the most you can win or lose is $15.'),
         ('Is the overall bet a separate match?', 'No. The overall is decided by the total holes won over all 18. If you win the front 2 up and lose the back 1 down, you win the overall 1 up.'),
         ('What happens if a Nassau bet is tied?', 'A tied segment is a push: nobody pays for that bet. Some groups play extra holes to settle the overall, but most just call it even.'),
-        ('What is a press in a Nassau?', 'A press is a new bet, for the same stake, that starts partway through a nine and runs to the end of it. It is usually called by the player who is losing, often once they are 2 holes down.'),
+        ('What is a press in a Nassau?', 'A press is a new bet, for the same stake, that starts partway through a nine and runs to the end of it. It is usually called by the player who is losing, often once they are 2 holes down. OnlyBirdies supports both manual presses and automatic presses at the number of holes down you choose.'),
         ('Why is it called a Nassau?', 'The format is widely credited to the Nassau Country Club on Long Island, New York, around the turn of the 20th century.'),
     ],
 )
@@ -656,7 +658,7 @@ def render_game(g):
 {faq}
     </div>
   </article>
-{cta(f"Play {g['name']} without the math", f"OnlyBirdies keeps score for your whole group, tracks {g['name']} and your other side games as scores go in, and tells everyone who owes whom at the end of the round.")}
+{cta(*a.get('cta', (f"Play {g['name']} without the math", f"OnlyBirdies keeps score for your whole group, tracks {g['name']} and your other side games as scores go in, and tells everyone who owes whom at the end of the round.")))}
 </section>
 
 <section class="sg-more">
