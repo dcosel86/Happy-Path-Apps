@@ -499,6 +499,25 @@
   .om-plan-list li::before { content: '✔'; color: var(--omilia-green); font-weight: 700; }
   .om-plan-card .om-hero-cta { margin-top: 26px; }
 
+  /* Guides */
+  .om-guides { padding: 90px 32px; background: var(--blue-50); }
+  .om-guides-inner { max-width: 1000px; margin: 0 auto; }
+  .om-guide-card {
+    display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 22px; margin-top: 32px;
+    background: white; border: 1px solid #DCEBFF; border-radius: var(--radius); padding: 26px 28px;
+    text-decoration: none; color: inherit; transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .om-guide-card:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(24,40,83,0.1); }
+  .om-guide-card .tag { font-size: 0.78rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--blue); }
+  .om-guide-card h3 { font-size: 1.3rem; color: var(--night); margin-top: 4px; }
+  .om-guide-card p { color: var(--slate); margin-top: 6px; line-height: 1.55; }
+  .om-guide-card .emoji { font-size: 2.2rem; width: 64px; height: 64px; border-radius: 18px; background: var(--blue-50); display: flex; align-items: center; justify-content: center; }
+  .om-guide-card .go { font-weight: 700; color: var(--blue); white-space: nowrap; }
+  @media (max-width: 700px) {
+    .om-guides { padding: 64px 16px; }
+    .om-guide-card { grid-template-columns: 1fr; gap: 12px; padding: 22px; }
+  }
+
   /* Story */
   .om-story { padding: 120px 32px; background: white; }
   .om-story-inner { max-width: 760px; margin: 0 auto; }
@@ -891,6 +910,24 @@
         <p>From the encouraging feedback to the game design, it&rsquo;s crafted to promote <strong>hope, healing</strong>, and a sense of <strong>joy</strong> in every small win.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- Guides -->
+<section class="om-guides">
+  <div class="om-guides-inner fade-up">
+    <span class="om-eyebrow">Free guides</span>
+    <h2 class="om-title">Help for the road to recovery.</h2>
+    <p class="om-sub">Practical, plain-language guides for people with aphasia and the families who support them.</p>
+    <a class="om-guide-card" href="aphasia-guides/word-finding-exercises/">
+      <div class="emoji" aria-hidden="true">&#128172;</div>
+      <div>
+        <span class="tag">Guide</span>
+        <h3>Word-finding exercises for aphasia: 8 to try at home</h3>
+        <p>Simple exercises for when the word won&rsquo;t come, plus cueing tips for caregivers.</p>
+      </div>
+      <span class="go">Read the guide &rarr;</span>
+    </a>
   </div>
 </section>
 
