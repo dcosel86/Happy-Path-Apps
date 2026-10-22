@@ -3,7 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Path Apps</title>
+<title>Happy Path Apps | Speech Therapy, Golf &amp; Youth Sports Apps</title>
+<meta name="description" content="Simple, delightful mobile apps: Omilía for aphasia speech therapy, OnlyBirdies for golf scores and side games, and Coach Assist for youth sports.">
+<link rel="canonical" href="https://happypathapps.co/">
+<link rel="icon" type="image/png" href="/images/favicon.png">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Happy Path Apps">
+<meta property="og:title" content="Happy Path Apps | Speech Therapy, Golf &amp; Youth Sports Apps">
+<meta property="og:description" content="Simple, delightful mobile apps: Omilía for aphasia speech therapy, OnlyBirdies for golf scores and side games, and Coach Assist for youth sports.">
+<meta property="og:url" content="https://happypathapps.co/">
+<meta property="og:image" content="https://happypathapps.co/images/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Happy Path Apps | Speech Therapy, Golf &amp; Youth Sports Apps">
+<meta name="twitter:description" content="Simple, delightful mobile apps: Omilía for aphasia speech therapy, OnlyBirdies for golf scores and side games, and Coach Assist for youth sports.">
+<meta name="twitter:image" content="https://happypathapps.co/images/og.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Happy Path Apps", "legalName": "Happy Path Apps, LLC", "url": "https://happypathapps.co/", "logo": "https://happypathapps.co/images/logo.png", "email": "David@happypathapps.co", "sameAs": ["https://apps.apple.com/us/developer/happy-path-apps-llc/id1291165527"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Happy Path Apps", "url": "https://happypathapps.co/"}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&family=Montserrat:wght@800&display=swap" rel="stylesheet">
 <style>
@@ -329,6 +347,7 @@
     border: 1px solid rgba(0,0,0,0.06); transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     background: var(--white);
   }
+  a.app-card { display: block; color: inherit; text-decoration: none; }
   .app-card:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(0,0,0,0.1); }
   .app-card-header {
     height: 220px; display: flex; align-items: center; justify-content: center;
@@ -711,7 +730,7 @@
 <!-- NAV -->
 <nav id="navbar">
   <div class="nav-inner">
-    <a class="logo" onclick="showPage('home')">
+    <a class="logo" href="/" onclick="event.preventDefault();showPage('home')">
       <div class="logo-icon">&#9728;&#65039;</div>
       Happy Path Apps
     </a>
@@ -719,9 +738,9 @@
         <span></span><span></span><span></span>
       </button>
       <div class="nav-links">
-      <a onclick="showPage('home');closeMenu()" class="active" data-page="home">Home</a>
+      <a href="/" onclick="event.preventDefault();showPage('home');closeMenu()" class="active" data-page="home">Home</a>
       <div class="nav-dropdown">
-        <a onclick="showPage('apps');closeMenu()" data-page="apps">Our Apps</a>
+        <a href="/#apps" onclick="event.preventDefault();showPage('apps');closeMenu()" data-page="apps">Our Apps</a>
         <div class="nav-menu">
           <div class="nav-menu-inner">
             <a href="/omilia/"><img src="/omilia/images/omilia-icon.png" alt=""><span class="nav-menu-text"><strong>Omilía</strong><small>Your partner in speech therapy</small></span></a>
@@ -732,7 +751,7 @@
           </div>
         </div>
       </div>
-      <a onclick="showPage('contact');closeMenu()" data-page="contact">Contact</a>
+      <a href="/#contact" onclick="event.preventDefault();showPage('contact');closeMenu()" data-page="contact">Contact</a>
     </div>
   </div>
 </nav>
@@ -745,8 +764,8 @@
         <h1>Apps that make<br>life <span>delightfully</span> simple.</h1>
         <p>We craft mobile experiences that feel effortless. Beautiful design, thoughtful UX, and a focus on the moments that matter.</p>
         <div class="hero-ctas">
-          <a class="btn btn-primary" onclick="showPage('apps')">Explore Our Apps &rarr;</a>
-          <a class="btn btn-secondary" onclick="showPage('contact')">Get in Touch</a>
+          <a class="btn btn-primary" href="/#apps" onclick="event.preventDefault();showPage('apps')">Explore Our Apps &rarr;</a>
+          <a class="btn btn-secondary" href="/#contact" onclick="event.preventDefault();showPage('contact')">Get in Touch</a>
         </div>
         <div class="hero-proof">
           <span class="hero-proof-icons"><img src="omilia/images/omilia-icon.png" alt=""><img src="onlyBirdies/images/onlybirdies-icon.png" alt=""><img src="coachassist/images/coachassist-icon.png" alt=""><img src="within/images/within-icon.png" alt=""></span>
@@ -812,7 +831,7 @@
       <div class="cta-banner fade-up">
         <h2>Ready to find your happy path?</h2>
         <p>Explore our family of apps and discover tools made with love.</p>
-        <a class="btn btn-primary" onclick="showPage('apps')">See Our Apps &rarr;</a>
+        <a class="btn btn-primary" href="/#apps" onclick="event.preventDefault();showPage('apps')">See Our Apps &rarr;</a>
       </div>
     </div>
   </section>
@@ -829,7 +848,7 @@
         <div class="section-subtitle">Each app is crafted to solve a real problem with elegance and simplicity.</div>
       </div>
       <div class="apps-grid">
-        <div class="app-card fade-up" onclick="window.location.href='omilia/'" style="cursor:pointer;">
+        <a class="app-card fade-up" href="omilia/">
           <div class="app-card-header" style="background: linear-gradient(135deg, #3D8DF4, #0ADD18);">
             <div class="app-logo"><img src="omilia/images/omilia-icon.png" alt="" style="width:100%;height:100%;border-radius:22px;"></div>
           </div>
@@ -839,8 +858,8 @@
             <p>Daily, interactive exercises for people with aphasia &mdash; plus a Therapist app for SLPs to assign work and monitor progress.</p>
             <div class="app-badges"><span class="app-badge"><svg class="apple-logo" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>iOS</span><span class="app-badge">&#129658; Therapist app</span></div>
           </div>
-        </div>
-        <div class="app-card fade-up" onclick="window.location.href='onlyBirdies/'" style="cursor:pointer; transition-delay: 0.1s;">
+        </a>
+        <a class="app-card fade-up" href="onlyBirdies/" style="transition-delay: 0.1s;">
           <div class="app-card-header" style="background: linear-gradient(135deg, #2D6A2E, #4CAF50);">
             <div class="app-logo"><img src="onlyBirdies/images/onlybirdies-icon.png" alt="" style="width:100%;height:100%;border-radius:22px;"></div>
           </div>
@@ -850,8 +869,8 @@
             <p>Keep score, track side games, settle bets, and celebrate your wins — all in one beautiful app built for your golf group.</p>
             <div class="app-badges"><span class="app-badge"><svg class="apple-logo" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>iOS</span><span class="app-badge"><svg class="google-logo" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>Android</span></div>
           </div>
-        </div>
-        <div class="app-card fade-up" onclick="window.location.href='coachassist/'" style="cursor:pointer; transition-delay: 0.2s;">
+        </a>
+        <a class="app-card fade-up" href="coachassist/" style="transition-delay: 0.2s;">
           <div class="app-card-header" style="background: linear-gradient(135deg, #FF8A1F, #FF3B30);">
             <div class="app-logo"><img src="coachassist/images/coachassist-icon.png" alt="" style="width:100%;height:100%;border-radius:22px;"></div>
           </div>
@@ -861,8 +880,8 @@
             <p>Track playing time live, get smart substitution suggestions, and share game reports with parents &mdash; for five sports.</p>
             <div class="app-badges"><span class="app-badge"><svg class="apple-logo" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>iOS</span><span class="app-badge">&#127936; 5 sports</span></div>
           </div>
-        </div>
-        <div class="app-card fade-up" onclick="window.location.href='within/'" style="cursor:pointer;">
+        </a>
+        <a class="app-card fade-up" href="within/">
           <div class="app-card-header" style="background: linear-gradient(135deg, #11CDF6, #008BC2);">
             <span class="app-card-flag">Client work</span>
             <div class="app-logo"><img src="within/images/within-icon.png" alt="" style="width:100%;height:100%;border-radius:22px;"></div>
@@ -873,7 +892,7 @@
             <p>Verse of the week, daily devotionals, memory games, and challenges. A Within Media Inc. app we&rsquo;re proud to support.</p>
             <div class="app-badges"><span class="app-badge"><svg class="apple-logo" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>iOS</span><span class="app-badge">&#129309; Partner app</span></div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </section>
@@ -882,7 +901,7 @@
       <div class="cta-banner fade-up">
         <h2>Got feedback or ideas?</h2>
         <p>We love hearing from our users. Tell us what you think or what you'd love to see next.</p>
-        <a class="btn btn-primary" onclick="showPage('contact')">Contact Us &rarr;</a>
+        <a class="btn btn-primary" href="/#contact" onclick="event.preventDefault();showPage('contact')">Contact Us &rarr;</a>
       </div>
     </div>
   </section>
