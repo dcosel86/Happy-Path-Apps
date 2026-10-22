@@ -115,6 +115,11 @@
   .nav-menu-text { display: flex; flex-direction: column; line-height: 1.25; }
   .nav-menu-text strong { font-weight: 600; font-size: 0.98rem; }
   .nav-menu-text small { color: var(--slate); font-size: 0.82rem; white-space: nowrap; }
+  .nav-menu-label {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--slate); padding: 12px 12px 4px; margin-top: 4px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
 
   /* Hamburger */
   .hamburger {
@@ -148,6 +153,7 @@
     .nav-links .nav-menu a { font-size: 1.05rem; padding: 8px 16px; }
     .nav-menu img { width: 32px; height: 32px; border-radius: 8px; }
     .nav-menu-text small { display: none; }
+    .nav-menu-label { text-align: center; border-top: none; padding-top: 8px; }
   }
 
   /* ─── SHARED BUTTONS ─── */
@@ -322,6 +328,12 @@
     background: rgba(255,255,255,0.25); backdrop-filter: blur(10px);
     display: flex; align-items: center; justify-content: center;
     font-size: 2rem; color: white; box-shadow: 0 8px 24px rgba(0,0,0,0.15); z-index: 1;
+  }
+  .app-card-flag {
+    position: absolute; top: 16px; right: 16px; z-index: 1;
+    background: rgba(255,255,255,0.92); color: var(--night);
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase;
+    padding: 6px 12px; border-radius: 50px;
   }
   .app-card-body { padding: 28px; }
   .app-card-body h3 { font-size: 1.3rem; font-weight: 700; color: var(--night); margin-bottom: 6px; }
@@ -703,6 +715,8 @@
             <a href="/onlyBirdies/"><img src="/onlyBirdies/images/onlybirdies-icon.png" alt=""><span class="nav-menu-text"><strong>OnlyBirdies</strong><small>Golf scoring, simplified</small></span></a>
             <a href="/omilia/"><img src="/omilia/images/omilia-icon.png" alt=""><span class="nav-menu-text"><strong>Omilía</strong><small>Your partner in speech therapy</small></span></a>
             <a href="/coachassist/"><img src="/coachassist/images/coachassist-icon.png" alt=""><span class="nav-menu-text"><strong>Coach Assist</strong><small>Fair playing time for youth sports</small></span></a>
+            <div class="nav-menu-label">Client work</div>
+            <a href="/within/"><img src="/within/images/within-icon.png" alt=""><span class="nav-menu-text"><strong>Within</strong><small>Memorize Scripture, learn its context</small></span></a>
           </div>
         </div>
       </div>
@@ -764,7 +778,7 @@
         <div class="stat-item"><div class="stat-number">50K+</div><div class="stat-label">Happy Users</div></div>
         <div class="stat-item"><div class="stat-number">4.9</div><div class="stat-label">App Store Rating</div></div>
         <div class="stat-item"><div class="stat-number">99.9%</div><div class="stat-label">Uptime</div></div>
-        <div class="stat-item"><div class="stat-number">4</div><div class="stat-label">Apps &amp; Counting</div></div>
+        <div class="stat-item"><div class="stat-number">5</div><div class="stat-label">Apps &amp; Counting</div></div>
       </div>
     </div>
   </section>
@@ -821,6 +835,18 @@
             <div class="app-tagline">Fair playing time for youth sports</div>
             <p>Track playing time live, get smart substitution suggestions, and share game reports with parents &mdash; for five sports.</p>
             <div class="app-badges"><span class="app-badge"><svg class="apple-logo" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>iOS</span><span class="app-badge">&#127936; 5 sports</span></div>
+          </div>
+        </div>
+        <div class="app-card fade-up" onclick="window.location.href='within/'" style="cursor:pointer;">
+          <div class="app-card-header" style="background: linear-gradient(135deg, #11CDF6, #008BC2);">
+            <span class="app-card-flag">Client work</span>
+            <div class="app-logo"><img src="within/images/within-icon.png" alt="" style="width:100%;height:100%;border-radius:22px;"></div>
+          </div>
+          <div class="app-card-body">
+            <h3>Within</h3>
+            <div class="app-tagline">Memorize Scripture, learn its context</div>
+            <p>Verse of the week, daily devotionals, memory games, and challenges. A Within Media Inc. app we&rsquo;re proud to support.</p>
+            <div class="app-badges"><span class="app-badge"><svg class="apple-logo" viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>iOS</span><span class="app-badge">&#129309; Partner app</span></div>
           </div>
         </div>
       </div>

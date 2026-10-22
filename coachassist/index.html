@@ -116,6 +116,11 @@
   .nav-menu-text { display: flex; flex-direction: column; line-height: 1.25; }
   .nav-menu-text strong { font-weight: 600; font-size: 0.98rem; }
   .nav-menu-text small { color: var(--slate); font-size: 0.82rem; white-space: nowrap; }
+  .nav-menu-label {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--slate); padding: 12px 12px 4px; margin-top: 4px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
 
   /* Hamburger */
   .hamburger {
@@ -149,6 +154,7 @@
     .nav-links .nav-menu a { font-size: 1.05rem; padding: 8px 16px; }
     .nav-menu img { width: 32px; height: 32px; border-radius: 8px; }
     .nav-menu-text small { display: none; }
+    .nav-menu-label { text-align: center; border-top: none; padding-top: 8px; }
   }
 
   /* ─── SHARED ─── */
@@ -417,6 +423,8 @@
             <a href="/onlyBirdies/"><img src="/onlyBirdies/images/onlybirdies-icon.png" alt=""><span class="nav-menu-text"><strong>OnlyBirdies</strong><small>Golf scoring, simplified</small></span></a>
             <a href="/omilia/"><img src="/omilia/images/omilia-icon.png" alt=""><span class="nav-menu-text"><strong>Omilía</strong><small>Your partner in speech therapy</small></span></a>
             <a href="/coachassist/" class="active"><img src="/coachassist/images/coachassist-icon.png" alt=""><span class="nav-menu-text"><strong>Coach Assist</strong><small>Fair playing time for youth sports</small></span></a>
+            <div class="nav-menu-label">Client work</div>
+            <a href="/within/"><img src="/within/images/within-icon.png" alt=""><span class="nav-menu-text"><strong>Within</strong><small>Memorize Scripture, learn its context</small></span></a>
           </div>
         </div>
       </div>
