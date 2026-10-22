@@ -244,54 +244,65 @@
     color: var(--slate); max-width: 480px;
   }
   .hero-ctas { margin-top: 40px; display: flex; gap: 16px; flex-wrap: wrap; }
+  .hero-proof {
+    margin-top: 28px; display: flex; align-items: center; gap: 12px;
+    color: var(--slate); font-size: 0.95rem;
+  }
+  .hero-proof-icons { display: flex; }
+  .hero-proof-icons img {
+    width: 32px; height: 32px; border-radius: 9px; border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(15,23,42,0.12);
+  }
+  .hero-proof-icons img + img { margin-left: -10px; }
+  .hero-proof strong { color: var(--night); }
 
   .hero-visual { display: flex; justify-content: center; align-items: center; position: relative; }
-  .phone-mockup {
-    width: 260px; height: 520px; background: var(--night);
-    border-radius: 40px; position: relative;
-    box-shadow: 0 40px 80px rgba(15,23,42,0.3), inset 0 0 0 3px rgba(255,255,255,0.1);
-    overflow: hidden;
+
+  /* Hero: one phone cycling through real app screens */
+  .hero-visual { flex-direction: column; }
+  .hero-stage { position: relative; display: flex; justify-content: center; padding: 10px 40px; }
+  .hero-glow {
+    position: absolute; left: 50%; top: 50%; width: 520px; height: 520px; max-width: 120vw;
+    transform: translate(-50%, -50%); border-radius: 50%; filter: blur(30px);
+    opacity: 0; transition: opacity 1s ease; pointer-events: none;
   }
-  .phone-mockup::before {
-    content: ''; position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
-    width: 90px; height: 28px; background: #000; border-radius: 20px; z-index: 2;
+  .hero-glow.active { opacity: 1; }
+  .cycle-phone {
+    position: relative; z-index: 1; width: 280px; padding: 10px; border-radius: 46px;
+    background: #111; box-shadow: 0 30px 60px rgba(15,23,42,0.25), inset 0 0 0 2px #2a2a2a;
+    transform: rotate(3deg);
   }
-  .phone-screen {
-    position: absolute; inset: 8px; border-radius: 34px;
-    background: linear-gradient(160deg, #667EEA, #764BA2, #F093FB);
-    display: flex; flex-direction: column; align-items: center;
-    padding: 60px 20px 30px; overflow: hidden;
+  .cycle-screens { position: relative; aspect-ratio: 700 / 1522; border-radius: 37px; overflow: hidden; background: #fff; }
+  .cycle-screens img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    opacity: 0; transform: scale(1.04); transition: opacity 0.8s ease, transform 1.2s ease;
   }
-  .phone-screen .app-icon-demo {
-    width: 64px; height: 64px; border-radius: 16px;
-    background: rgba(255,255,255,0.25); backdrop-filter: blur(10px);
-    margin-bottom: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem;
+  .cycle-screens img.active { opacity: 1; transform: scale(1); }
+  .cycle-caption {
+    position: relative; z-index: 2; margin-top: 26px;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
   }
-  .phone-screen .screen-title {
-    color: white; font-family: 'Bricolage Grotesque', sans-serif;
-    font-weight: 700; font-size: 1.1rem; margin-bottom: 8px;
+  .cycle-label {
+    display: inline-flex; align-items: center; gap: 12px; text-decoration: none;
+    background: white; border-radius: 18px; padding: 8px 18px 8px 8px;
+    box-shadow: 0 10px 30px rgba(15,23,42,0.12); border: 1px solid rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
   }
-  .phone-screen .screen-subtitle { color: rgba(255,255,255,0.7); font-size: 0.8rem; margin-bottom: 24px; }
-  .screen-cards { width: 100%; display: flex; flex-direction: column; gap: 10px; }
-  .screen-card {
-    background: rgba(255,255,255,0.2); backdrop-filter: blur(10px);
-    border-radius: 14px; padding: 14px; display: flex; gap: 12px; align-items: center;
+  .cycle-label:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(15,23,42,0.16); }
+  .cycle-label img { width: 40px; height: 40px; border-radius: 10px; }
+  .cycle-label-text { display: flex; flex-direction: column; text-align: left; line-height: 1.25; }
+  .cycle-label-text strong { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1rem; color: var(--night); }
+  .cycle-label-text small { font-size: 0.82rem; color: var(--slate); }
+  .cycle-label-text { transition: opacity 0.3s; }
+  .cycle-label.swap .cycle-label-text, .cycle-label.swap img { opacity: 0; }
+  .cycle-label img { transition: opacity 0.3s; }
+  .cycle-dots { display: flex; gap: 8px; }
+  .cycle-dots button {
+    width: 8px; height: 8px; border-radius: 50px; border: none; padding: 0; cursor: pointer;
+    background: rgba(15,23,42,0.18); transition: width 0.3s, background 0.3s;
   }
-  .screen-card-dot { width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0; }
-  .screen-card-lines { flex: 1; }
-  .screen-card-line { height: 8px; border-radius: 4px; background: rgba(255,255,255,0.35); margin-bottom: 6px; }
-  .screen-card-line:last-child { width: 60%; margin-bottom: 0; }
-  .floating-badge {
-    position: absolute; padding: 10px 18px; border-radius: 14px; background: var(--white);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12); font-weight: 600; font-size: 0.85rem;
-    display: flex; align-items: center; gap: 8px; animation: float 3s ease-in-out infinite;
-  }
-  .floating-badge.b1 { top: 60px; right: -20px; animation-delay: 0s; }
-  .floating-badge.b2 { bottom: 80px; left: -30px; animation-delay: 1.5s; }
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
+  .cycle-dots button.active { width: 26px; background: var(--night); }
+
 
   .features-section { background: var(--cloud); }
   .features-grid {
@@ -638,12 +649,11 @@
     .hero-inner, .ob-hero-inner, .ob-features-inner, .ob-sidegames-inner,
     .contact-grid { grid-template-columns: 1fr; text-align: center; }
     .hero-text p { margin-left: auto; margin-right: auto; }
-    .hero-ctas, .ob-store-badges { justify-content: center; }
+    .hero-ctas, .ob-store-badges, .hero-proof { justify-content: center; }
     .hero-visual { margin-top: 40px; }
     .features-grid { grid-template-columns: 1fr; }
     .stats-bar { grid-template-columns: repeat(2, 1fr); }
     .apps-grid { grid-template-columns: 1fr; }
-    .floating-badge { display: none; }
     .ob-features-list, .ob-sidegames-list { text-align: left; }
     .ob-sidegames-visual { order: -1; }
     .ob-footer-inner { flex-direction: column; text-align: center; }
@@ -652,7 +662,9 @@
   @media (max-width: 600px) {
     .nav-inner { padding: 12px 20px; }
     section { padding: 60px 20px; }
-    .phone-mockup { width: 220px; height: 440px; }
+    .cycle-phone { width: 230px; border-radius: 40px; padding: 8px; }
+    .cycle-screens { border-radius: 32px; }
+    .hero-glow { width: 360px; height: 360px; }
     .ob-games-icons { gap: 20px; }
     .ob-game-icon img { width: 56px; height: 56px; }
   }
@@ -736,22 +748,35 @@
           <a class="btn btn-primary" onclick="showPage('apps')">Explore Our Apps &rarr;</a>
           <a class="btn btn-secondary" onclick="showPage('contact')">Get in Touch</a>
         </div>
+        <div class="hero-proof">
+          <span class="hero-proof-icons"><img src="onlyBirdies/images/onlybirdies-icon.png" alt=""><img src="coachassist/images/coachassist-icon.png" alt=""><img src="omilia/images/omilia-icon.png" alt=""><img src="within/images/within-icon.png" alt=""></span>
+          <span>Loved by <strong>thousands of happy users</strong></span>
+        </div>
       </div>
       <div class="hero-visual fade-up" style="transition-delay: 0.15s;">
-        <div class="phone-mockup">
-          <div class="phone-screen">
-            <div class="app-icon-demo">&#10024;</div>
-            <div class="screen-title">Good Morning!</div>
-            <div class="screen-subtitle">3 tasks for today</div>
-            <div class="screen-cards">
-              <div class="screen-card"><div class="screen-card-dot" style="background: rgba(255,210,51,0.5);"></div><div class="screen-card-lines"><div class="screen-card-line"></div><div class="screen-card-line"></div></div></div>
-              <div class="screen-card"><div class="screen-card-dot" style="background: rgba(52,211,153,0.5);"></div><div class="screen-card-lines"><div class="screen-card-line"></div><div class="screen-card-line"></div></div></div>
-              <div class="screen-card"><div class="screen-card-dot" style="background: rgba(59,130,246,0.5);"></div><div class="screen-card-lines"><div class="screen-card-line"></div><div class="screen-card-line"></div></div></div>
+        <div class="hero-stage">
+          <div class="hero-glow active" style="background: radial-gradient(circle, rgba(76,187,60,0.5), transparent 65%);"></div>
+          <div class="hero-glow" style="background: radial-gradient(circle, rgba(255,138,31,0.5), transparent 65%);"></div>
+          <div class="hero-glow" style="background: radial-gradient(circle, rgba(61,141,244,0.45), transparent 65%);"></div>
+          <div class="hero-glow" style="background: radial-gradient(circle, rgba(17,205,246,0.45), transparent 65%);"></div>
+          <div class="cycle-phone">
+            <div class="cycle-screens">
+              <img class="active" src="onlyBirdies/images/home.jpg" alt="OnlyBirdies home screen with an active round and today's leaders">
+              <img src="coachassist/images/subs.jpg" alt="Coach Assist live game with suggested substitutions" loading="lazy">
+              <img src="omilia/images/hero-match.jpg" alt="Omilía matching exercise pairing pictures of foods with their words, with a Great Job, 6 in a row banner" loading="lazy">
+              <img src="within/images/home.jpg" alt="Within home screen with the verse of the week" loading="lazy">
             </div>
           </div>
         </div>
-        <div class="floating-badge b1">&#11088; 4.9 Rating</div>
-        <div class="floating-badge b2">&#128242; 50K+ Downloads</div>
+        <div class="cycle-caption">
+          <a class="cycle-label" href="onlyBirdies/"><img src="onlyBirdies/images/onlybirdies-icon.png" alt=""><span class="cycle-label-text"><strong>OnlyBirdies</strong><small>Golf scoring, simplified</small></span></a>
+          <div class="cycle-dots">
+            <button type="button" class="active" aria-label="Show OnlyBirdies"></button>
+            <button type="button" aria-label="Show Coach Assist"></button>
+            <button type="button" aria-label="Show Omil&iacute;a"></button>
+            <button type="button" aria-label="Show Within"></button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -775,10 +800,10 @@
   <section>
     <div class="section-inner">
       <div class="stats-bar fade-up">
-        <div class="stat-item"><div class="stat-number">50K+</div><div class="stat-label">Happy Users</div></div>
-        <div class="stat-item"><div class="stat-number">4.9</div><div class="stat-label">App Store Rating</div></div>
-        <div class="stat-item"><div class="stat-number">99.9%</div><div class="stat-label">Uptime</div></div>
+        <div class="stat-item"><div class="stat-number">Thousands</div><div class="stat-label">Of Happy Users</div></div>
+        <div class="stat-item"><div class="stat-number">4.8</div><div class="stat-label">Avg. App Store Rating</div></div>
         <div class="stat-item"><div class="stat-number">5</div><div class="stat-label">Apps &amp; Counting</div></div>
+        <div class="stat-item"><div class="stat-number">2</div><div class="stat-label">Platforms: iOS &amp; Android</div></div>
       </div>
     </div>
   </section>
@@ -948,6 +973,40 @@
       contactReasonSelect.addEventListener('change', toggleContactAppSelection);
     }
   });
+
+  // Hero: cycle through app screens
+  (function() {
+    const apps = [{"href": "onlyBirdies/", "icon": "onlyBirdies/images/onlybirdies-icon.png", "name": "OnlyBirdies", "tagline": "Golf scoring, simplified"}, {"href": "coachassist/", "icon": "coachassist/images/coachassist-icon.png", "name": "Coach Assist", "tagline": "Fair playing time for youth sports"}, {"href": "omilia/", "icon": "omilia/images/omilia-icon.png", "name": "Omilía", "tagline": "Your partner in speech therapy"}, {"href": "within/", "icon": "within/images/within-icon.png", "name": "Within", "tagline": "Memorize Scripture, learn its context"}];
+    const imgs = document.querySelectorAll('.cycle-screens img');
+    const glows = document.querySelectorAll('.hero-glow');
+    const dots = document.querySelectorAll('.cycle-dots button');
+    const label = document.querySelector('.cycle-label');
+    if (!imgs.length || !label) return;
+    let current = 0, timer = null;
+    function show(i) {
+      current = (i + apps.length) % apps.length;
+      [imgs, glows, dots].forEach(list => list.forEach((el, j) => el.classList.toggle('active', j === current)));
+      label.classList.add('swap');
+      setTimeout(() => {
+        const a = apps[current];
+        label.href = a.href;
+        label.querySelector('img').src = a.icon;
+        label.querySelector('strong').textContent = a.name;
+        label.querySelector('small').textContent = a.tagline;
+        label.classList.remove('swap');
+      }, 300);
+    }
+    function start() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      stop(); timer = setInterval(() => show(current + 1), 3500);
+    }
+    function stop() { clearInterval(timer); }
+    dots.forEach((d, j) => d.addEventListener('click', () => { show(j); start(); }));
+    const stage = document.querySelector('.hero-visual');
+    stage.addEventListener('mouseenter', stop);
+    stage.addEventListener('mouseleave', start);
+    start();
+  })();
 </script>
 </body>
 </html>
