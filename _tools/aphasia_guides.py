@@ -115,7 +115,8 @@ dict(
     h1='Word-finding exercises for aphasia: 8 to try at home',
     desc='Simple word-finding exercises for people with aphasia and their caregivers, with cueing tips, how to practice at home, and when to involve a speech therapist.',
     lede='You know exactly what you want to say, but the word won&rsquo;t come. That&rsquo;s one of the most common &mdash; and most frustrating &mdash; parts of aphasia. The good news: word-finding is a skill you can practice. Here are eight exercises you can do at home, plus tips for caregivers who want to help.',
-    toc=['What word-finding difficulty is', 'Before you start', 'Eight exercises to try', 'How caregivers can help', 'How Omilía can help', 'FAQ'],
+    toc=[('what', 'What word-finding difficulty is'), ('before', 'Before you start'), ('exercises', 'Eight exercises to try'),
+         ('caregivers', 'How caregivers can help'), ('omilia', 'How Omilía can help'), ('faq', 'FAQ')],
     body="""
 <h2 id="what">What is word-finding difficulty?</h2>
 <p>Word-finding difficulty &mdash; also called <strong>anomia</strong> &mdash; is trouble coming up with the right word, especially names for people, places and things. It can feel like a constant &ldquo;tip of the tongue&rdquo; moment. Someone might:</p>
@@ -178,6 +179,7 @@ dict(
   <li><strong>Keep it relaxed.</strong> Practice works best when it doesn&rsquo;t feel like a test. Avoid quizzing during stressful moments or in front of others.</li>
   <li><strong>Celebrate effort.</strong> Every attempt is practice, and small wins add up.</li>
 </ul>
+<p>For everyday conversation tips beyond practice time, see our guide on <a href="/omilia/aphasia-guides/communication-tips/">how to communicate with someone who has aphasia</a>.</p>
 
 <h2 id="omilia">How Omilía can help</h2>
 <p>Omilía is an aphasia speech therapy app built to make daily practice simple. Several of its exercises focus on word-finding:</p>
@@ -202,6 +204,90 @@ dict(
          'Give them time first, and offer small hints before giving the whole word. Preferences differ, so ask the person whether they want help finding words and how much.'),
         ('Are word-finding apps a replacement for speech therapy?',
          'No. Apps like Omilía are designed to support practice at home between sessions, not to replace a speech-language pathologist.'),
+    ],
+),
+dict(
+    slug='communication-tips',
+    updated='2026-10-21',
+    title='How to Communicate With Someone Who Has Aphasia',
+    h1='How to communicate with someone who has aphasia',
+    desc='Practical communication tips for families and caregivers of people with aphasia: how to talk, listen, use gestures and pictures, and keep conversations going.',
+    lede='When someone you love has aphasia, everyday conversation can suddenly feel hard for both of you. A few simple changes in how you talk and listen can make a big difference. Here&rsquo;s a practical guide for family members, friends and caregivers.',
+    toc=[('what', 'What aphasia is &mdash; and isn&rsquo;t'), ('talking', 'Tips for talking'), ('listening', 'Tips for listening'),
+         ('tools', 'Tools that help'), ('yourself', 'Taking care of yourself'), ('omilia', 'How Omil&iacute;a can help'), ('faq', 'FAQ')],
+    body="""
+<h2 id="what">What aphasia is &mdash; and isn&rsquo;t</h2>
+<p>Aphasia is a language disorder. It most often follows a stroke or brain injury, and it can affect speaking, understanding, reading and writing in different ways for different people.</p>
+<p>The most important thing to remember: <strong>aphasia affects language, not intelligence.</strong> The person still has their thoughts, opinions, memories and personality. They just have trouble getting words in or out. Treating them as the capable adult they are is the foundation of every tip below.</p>
+
+<h2 id="talking">Tips for talking</h2>
+<h3>Set up the conversation</h3>
+<ul>
+  <li><strong>Get their attention first.</strong> Say their name, make eye contact, and face them.</li>
+  <li><strong>Cut background noise.</strong> Turn off the TV or move somewhere quieter. Distractions make understanding much harder.</li>
+  <li><strong>One conversation at a time.</strong> Group conversations move fast. In a group, slow the pace and make room for them to join in.</li>
+</ul>
+<h3>Keep it clear</h3>
+<ul>
+  <li><strong>Use short, simple sentences</strong> with one idea at a time.</li>
+  <li><strong>Slow down a little</strong> and pause between ideas &mdash; but keep a natural rhythm.</li>
+  <li><strong>Don&rsquo;t raise your voice.</strong> Aphasia isn&rsquo;t a hearing problem. Speaking louder doesn&rsquo;t help and can feel patronizing.</li>
+  <li><strong>Use a normal adult tone.</strong> Avoid talking down or speaking as if they aren&rsquo;t there.</li>
+</ul>
+<h3>Make it easier to answer</h3>
+<ul>
+  <li><strong>Ask yes/no questions</strong> when you need a clear answer: &ldquo;Do you want coffee?&rdquo;</li>
+  <li><strong>Offer choices:</strong> &ldquo;Coffee or tea?&rdquo; &mdash; and show the options if you can.</li>
+  <li><strong>Add gestures, pictures and written key words.</strong> Pointing, showing a photo or writing one key word down can make your message much easier to understand.</li>
+</ul>
+
+<h2 id="listening">Tips for listening</h2>
+<ul>
+  <li><strong>Give time.</strong> Wait patiently while they search for words. Silence is okay.</li>
+  <li><strong>Accept every way of communicating.</strong> Gestures, pointing, drawing, writing and facial expressions all count.</li>
+  <li><strong>Ask before you help.</strong> Some people want you to suggest the word; others want to find it themselves. Ask what they prefer.</li>
+  <li><strong>Check that you understood.</strong> Repeat back what you think they meant: &ldquo;So you want to call your sister?&rdquo;</li>
+  <li><strong>Don&rsquo;t pretend to understand.</strong> It&rsquo;s better to say &ldquo;I&rsquo;m not getting it yet &mdash; let&rsquo;s try another way&rdquo; than to nod along.</li>
+  <li><strong>Focus on the message, not mistakes.</strong> Correcting every wrong word is discouraging. What matters is understanding each other.</li>
+  <li><strong>Take a break if it&rsquo;s not working.</strong> Frustration is normal. Come back to it later.</li>
+</ul>
+
+<h2 id="tools">Tools that help</h2>
+<ul>
+  <li><strong>A communication notebook or board</strong> with photos and key words: family names, places, foods, feelings, and common needs like &ldquo;tired,&rdquo; &ldquo;pain&rdquo; or &ldquo;bathroom.&rdquo;</li>
+  <li><strong>A calendar and a map</strong> to point to when talking about times and places.</li>
+  <li><strong>A rating scale</strong> (1&ndash;10, or simple faces) for questions like &ldquo;How&rsquo;s your pain today?&rdquo;</li>
+  <li><strong>Paper and a pen</strong> close by, for writing or drawing key words.</li>
+  <li><strong>Photos on a phone or tablet</strong> to show people, places and things you want to talk about.</li>
+</ul>
+<p>A speech-language pathologist (SLP) can help you build these tools around the person&rsquo;s strengths, and can coach the whole family on communication strategies.</p>
+
+<h2 id="yourself">Taking care of yourself</h2>
+<p>Supporting someone with aphasia is meaningful &mdash; and tiring. Caregivers need support too:</p>
+<ul>
+  <li><strong>Ask the SLP to include you</strong> in sessions or give you strategies to use at home.</li>
+  <li><strong>Find a support group.</strong> Aphasia and stroke support groups, in person or online, connect you with families who understand.</li>
+  <li><strong>Share the load.</strong> Let other family members and friends learn the same communication tips so it doesn&rsquo;t all fall on you.</li>
+  <li><strong>Take breaks</strong> without guilt.</li>
+</ul>
+
+<h2 id="omilia">How Omil&iacute;a can help</h2>
+<p>Omil&iacute;a is an aphasia speech therapy app built for home practice. For families, it offers a daily plan you can sit down and do together, with progress you can actually see. You can make your own flash cards with the photos and words that matter most &mdash; family names, pets, favorite places &mdash; which double as a simple communication tool. And if your loved one works with a speech therapist, the therapist can assign homework and follow progress through <a href="/omilia/#therapists">Omil&iacute;a Therapist</a>.</p>
+<p>Looking for practice ideas? See our guide to <a href="/omilia/aphasia-guides/word-finding-exercises/">word-finding exercises for aphasia</a>.</p>
+
+<div class="ag-note warn"><p><strong>Important:</strong> new or suddenly worse trouble speaking or understanding can be a sign of a stroke. Call 911 or your local emergency number right away.</p></div>
+""",
+    faq=[
+        ('Does aphasia affect intelligence?',
+         'No. Aphasia affects language, not intelligence. People with aphasia keep their thoughts, memories, opinions and personality, even when finding or understanding words is hard.'),
+        ('Should I speak louder to someone with aphasia?',
+         'No, unless they also have hearing loss. Speaking slowly and clearly, with short sentences, helps much more than speaking louder.'),
+        ('Is it okay to finish sentences for someone with aphasia?',
+         'Give them time first, and ask what they prefer. Some people welcome a suggested word, while others want to find it themselves.'),
+        ('What is a communication board for aphasia?',
+         'A communication board or notebook has pictures and key words, such as family names, places, foods and common needs, that a person with aphasia can point to when words are hard to find.'),
+        ('Where can caregivers of people with aphasia find support?',
+         'A speech-language pathologist is a good first stop for strategies. Aphasia and stroke support groups, in person or online, can also connect caregivers with others who understand.'),
     ],
 ),
 ]
@@ -229,8 +315,7 @@ def render(a):
         {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
             {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": ans}} for q, ans in a['faq']]},
     ]
-    toc_ids = ['what', 'before', 'exercises', 'caregivers', 'omilia', 'faq']
-    toc = ''.join(f'<li><a href="#{i}">{t}</a></li>' for i, t in zip(toc_ids, a['toc']))
+    toc = ''.join(f'<li><a href="#{i}">{label}</a></li>' for i, label in a['toc'])
     faq = '\n'.join(f'<details><summary>{escape(q)}</summary><p>{escape(ans)}</p></details>' for q, ans in a['faq'])
     tags = [
         f'<title>{escape(a["title"])}</title>',
