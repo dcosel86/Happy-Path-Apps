@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Omilía Kids Privacy Policy | Happy Path Apps</title>
+<meta name="description" content="How Omilía Kids, the speech and language practice app for children ages 3 and up, collects, uses and protects information.">
+<link rel="canonical" href="https://happypathapps.co/omilia-kids/privacy/">
+<link rel="icon" type="image/png" href="/images/favicon.png">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Happy Path Apps">
+<meta property="og:title" content="Omilía Kids Privacy Policy | Happy Path Apps">
+<meta property="og:description" content="How Omilía Kids, the speech and language practice app for children ages 3 and up, collects, uses and protects information.">
+<meta property="og:url" content="https://happypathapps.co/omilia-kids/privacy/">
+<meta property="og:image" content="https://happypathapps.co/omilia/images/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Omilía Kids Privacy Policy | Happy Path Apps">
+<meta name="twitter:description" content="How Omilía Kids, the speech and language practice app for children ages 3 and up, collects, uses and protects information.">
+<meta name="twitter:image" content="https://happypathapps.co/omilia/images/og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --green: #2D6A2E;
+    --green-light: #C6F6C6;
+    --green-accent: #4CAF50;
+    --night: #0F172A;
+    --ink: #1E293B;
+    --slate: #64748B;
+    --cloud: #F5F5F5;
+    --white: #FFFFFF;
+    --coral: #FF6B5A;
+    --ocean: #3B82F6;
+    --sunbeam: #FFD233;
+    --radius: 20px;
+    --radius-sm: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    background: var(--white);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 { font-family: 'Bricolage Grotesque', sans-serif; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    transition: box-shadow 0.3s;
+  }
+  nav.menu-open { bottom: 0; background: #ffffff; }
+  nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 32px;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800; font-size: 1.35rem; color: var(--night);
+    cursor: pointer; text-decoration: none;
+  }
+  .logo-icon {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--sunbeam), var(--coral));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; color: white;
+    box-shadow: 0 4px 12px rgba(255,107,90,0.35);
+  }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-links a {
+    text-decoration: none; color: var(--slate);
+    font-weight: 500; font-size: 0.95rem;
+    padding: 8px 18px; border-radius: 50px;
+    transition: all 0.25s; cursor: pointer;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--night); background: var(--cloud);
+  }
+
+  /* Our Apps dropdown */
+  .nav-dropdown { position: relative; }
+  .nav-dropdown > a { display: inline-flex; align-items: center; gap: 6px; }
+  .nav-dropdown > a::after {
+    content: ''; width: 6px; height: 6px; margin-top: -3px;
+    border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg); transition: transform 0.2s;
+  }
+  .nav-dropdown:hover > a::after, .nav-dropdown:focus-within > a::after { transform: rotate(-135deg); margin-top: 3px; }
+  .nav-menu {
+    position: absolute; top: 100%; left: 50%; padding-top: 10px;
+    transform: translate(-50%, 6px); opacity: 0; visibility: hidden;
+    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+  }
+  .nav-dropdown:hover .nav-menu, .nav-dropdown:focus-within .nav-menu {
+    opacity: 1; visibility: visible; transform: translate(-50%, 0);
+  }
+  .nav-menu-inner {
+    background: white; border-radius: 16px; padding: 8px; min-width: 300px;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 16px 40px rgba(15,23,42,0.14);
+  }
+  .nav-links .nav-menu a {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px; border-radius: 12px; color: var(--night);
+  }
+  .nav-links .nav-menu a:hover, .nav-links .nav-menu a.active { background: var(--cloud); }
+  .nav-menu img {
+    width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+  }
+  .nav-menu-text { display: flex; flex-direction: column; line-height: 1.25; }
+  .nav-menu-text strong { font-weight: 600; font-size: 0.98rem; }
+  .nav-menu-text small { color: var(--slate); font-size: 0.82rem; white-space: nowrap; }
+
+  /* Hamburger */
+  .hamburger {
+    display: none; background: none; border: none; cursor: pointer;
+    padding: 8px; flex-direction: column; gap: 5px; z-index: 101;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px; background: var(--night);
+    border-radius: 2px; transition: all 0.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  @media (max-width: 700px) {
+    .hamburger { display: flex; z-index: 101; }
+    .nav-links {
+      display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px; background: #ffffff;
+    }
+    nav.menu-open { bottom: 0; }
+    .nav-links.open { display: flex; }
+    .nav-links a { font-size: 1.4rem; padding: 16px 40px; color: var(--night); }
+    .nav-links a.active { background: var(--cloud); }
+    .nav-dropdown { display: flex; flex-direction: column; align-items: center; }
+    .nav-dropdown > a::after { display: none; }
+    .nav-menu { position: static; transform: none; opacity: 1; visibility: visible; padding-top: 0; }
+    .nav-dropdown:hover .nav-menu, .nav-dropdown:focus-within .nav-menu { transform: none; }
+    .nav-menu-inner { box-shadow: none; border: none; min-width: 0; padding: 0; }
+    .nav-links .nav-menu a { font-size: 1.05rem; padding: 8px 16px; }
+    .nav-menu img { width: 32px; height: 32px; border-radius: 8px; }
+    .nav-menu-text small { display: none; }
+  }
+
+  /* ─── CONTENT ─── */
+  .content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 120px 32px 80px;
+  }
+
+  .content h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--night);
+    margin-bottom: 8px;
+  }
+
+  .last-updated {
+    color: var(--slate);
+    font-size: 0.95rem;
+    margin-bottom: 48px;
+  }
+
+  .content h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--night);
+    margin-top: 40px;
+    margin-bottom: 12px;
+  }
+
+  .content h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 20px;
+    margin-bottom: 8px;
+  }
+
+  .content p {
+    color: var(--slate);
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+
+  .content ul, .content ol {
+    color: var(--slate);
+    line-height: 1.75;
+    padding-left: 24px;
+    margin-bottom: 12px;
+  }
+
+  .content ul li {
+    margin-bottom: 4px;
+  }
+
+  .content a {
+    color: var(--green);
+    text-decoration: none;
+  }
+
+  .content a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 700px) {
+    .content { padding: 100px 24px 60px; }
+    .content h1 { font-size: 1.75rem; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a class="logo" href="/">
+      <div class="logo-icon">&#9728;&#65039;</div>
+      Happy Path Apps
+    </a>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <div class="nav-dropdown">
+        <a href="/#apps">Our Apps</a>
+        <div class="nav-menu">
+          <div class="nav-menu-inner">
+            <a href="/onlyBirdies/"><img src="/onlyBirdies/images/onlybirdies-icon.png" alt=""><span class="nav-menu-text"><strong>OnlyBirdies</strong><small>Golf scoring, simplified</small></span></a>
+            <a href="/omilia/"><img src="/omilia/images/omilia-icon.png" alt=""><span class="nav-menu-text"><strong>Omilía</strong><small>Your partner in speech therapy</small></span></a>
+            <a href="/coachassist/"><img src="/coachassist/images/coachassist-icon.png" alt=""><span class="nav-menu-text"><strong>Coach Assist</strong><small>Fair playing time for youth sports</small></span></a>
+          </div>
+        </div>
+      </div>
+      <a href="/#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- CONTENT -->
+<div class="content">
+  <h1>Omilía Kids Privacy Policy</h1>
+  
+<p class="last-updated">Effective Date: October 25, 2026</p>
+  
+<h2>1. INTRODUCTION</h2>
+  
+<p>This Privacy Policy explains how <strong>Happy Path Apps, LLC</strong> ("we," "us," or "our") collects, uses, and shares information through the <strong>Omilía Kids</strong> app ("the App"). The App is made for children ages 3 and up and the grown-ups who help them. We designed it to collect as little as possible, and we follow the U.S. Children's Online Privacy Protection Act (COPPA).</p>
+  
+<p>The App is set up and managed by a parent, guardian, or other responsible adult such as a teacher or speech therapist ("you" or "the grown-up"). Anything that involves money, account sign-in, settings, making or deleting flash cards, detailed progress, or leaving the App is behind a grown-up check.</p>
+  
+<h2>2. WHAT WE DON'T DO</h2>
+  
+<ul><li><strong>No advertising.</strong> The App shows no ads of any kind.</li><li><strong>No tracking.</strong> We don't track your child across other apps or websites, and we don't use third-party analytics or advertising tools.</li><li><strong>No selling or sharing for marketing.</strong> We never sell personal information or share it for advertising.</li><li><strong>No social features.</strong> Children can't chat with, message, or share anything with other people in the App.</li></ul>
+  
+<h2>3. INFORMATION WE COLLECT</h2>
+  
+<p><strong>Information a grown-up provides:</strong></p>
+  
+<ul><li><strong>Account details</strong>, only if you create an account: your name and email address (from Sign in with Apple, Google, or email). You can also use the App as a guest without giving us either.</li><li><strong>Setup answers</strong>: who is setting up the App (parent or teacher), your child's age range (for example "3 to 5"), what you'd like to work on, and how long sessions usually are.</li><li><strong>Custom flash cards</strong>: photos you take or choose, and the words and category names you type for them.</li><li><strong>Settings</strong>, such as which games are offered.</li><li><strong>Your acceptance</strong> of the Parent Agreement, and when you accepted it.</li></ul>
+  
+<p><strong>Information created while your child plays:</strong></p>
+  
+<ul><li><strong>Progress</strong>: which games were played, when, whether each answer was right, and which hints were used.</li><li><strong>Rewards</strong>: stickers earned, progress toward the next sticker, daily streaks, and the avatar your child picks.</li><li><strong>Setup progress</strong>: a simple record of which setup screens were reached, used only to see where families get stuck.</li><li><strong>An account identifier</strong>: a random ID that keeps all of the above together, including for guest accounts.</li></ul>
+  
+<p><strong>Information that stays on your device and is never sent to us:</strong></p>
+  
+<ul><li><strong>Your child's name</strong>, if you enter one. It's used only to show a greeting on screen.</li></ul>
+  
+<p><strong>Speech and the camera:</strong></p>
+  
+<ul><li>In the Speak game, your child's speech is turned into text by <strong>Apple's built-in speech recognition</strong>, which may send the audio to Apple to process it under Apple's privacy policy. We don't record or keep any audio, and we don't keep what was said, only whether the answer was right.</li><li>The camera can be shown as a mirror in Speak so your child can watch their mouth. Nothing from the mirror is recorded or saved. The camera is otherwise only used when a grown-up takes a photo for a flash card.</li></ul>
+  
+<h2>4. HOW WE USE INFORMATION</h2>
+  
+<p>We use the information above only to:<br>1. <strong>Run the App</strong>: keep your child's progress, stickers, cards, and settings, and keep them in sync across your devices.<br>2. <strong>Personalize practice</strong>: pick suitable first games and a daily plan from the age range and focus you chose.<br>3. <strong>Improve the App</strong>: understand which parts of setup and the games work well, using the progress and setup records described above. We don't use them to build advertising profiles.<br>4. <strong>Support and legal needs</strong>: answer your questions, keep the App secure, and meet legal obligations.</p>
+  
+<h2>5. WHO WE SHARE INFORMATION WITH</h2>
+  
+<p>We share information only with service providers that help us run the App, and only as needed for that:</p>
+  
+<ul><li><strong>Google Firebase</strong> (part of Google Cloud) stores accounts, progress, settings, and flash card photos on our behalf.</li><li><strong>Apple</strong> handles purchases and subscriptions, Sign in with Apple, and speech recognition.</li><li><strong>Text-to-speech providers</strong> turn the App's own words (such as game instructions and card names) into speech. Only the App's text is sent, never your child's name, voice, or other personal information.</li></ul>
+  
+<p>We may also disclose information if required by law, to protect the safety of a child or others, or as part of a merger or sale of our business (in which case this policy will continue to apply to your child's information).</p>
+  
+<h2>6. CHILDREN'S PRIVACY AND YOUR RIGHTS AS A PARENT</h2>
+  
+<p>We don't require a child to give more information than is needed to play. As a parent or guardian, you can at any time:</p>
+  
+<ul><li><strong>Review</strong> the information we hold about your child.</li><li><strong>Delete</strong> it: use <strong>Settings → Delete Account</strong> in the App (behind the grown-up check), or email us. Deleting the account permanently removes the progress, cards, photos, and other information described above from our servers.</li><li><strong>Stop further collection</strong> by deleting the account and the App.</li></ul>
+  
+<p>To make a request, email <strong>david@happypathapps.co</strong>. We may ask you to confirm that you are the child's parent or guardian before we act on it.</p>
+  
+<p>If you use the App as a teacher or therapist with children who aren't your own, you're responsible for having any permission from parents that your school, practice, or local law requires.</p>
+  
+<h2>7. DATA SECURITY</h2>
+  
+<p>Information is sent over encrypted connections and stored with Google Firebase, which protects it with industry-standard security. Each account can only read its own information. No method of storage or transmission is completely secure, but we work to protect your child's information and to keep as little of it as we can.</p>
+  
+<h2>8. DATA RETENTION</h2>
+  
+<p>We keep the information described above for as long as the account exists, so your child's progress and stickers are there when they come back. When an account is deleted, we delete its information from our servers, except where the law requires us to keep something.</p>
+  
+<h2>9. INTERNATIONAL USERS</h2>
+  
+<p>The App is operated from the United States, and information is stored on servers in the United States. If you use the App from another country, your information will be transferred to and processed in the United States.</p>
+  
+<h2>10. CHANGES TO THIS PRIVACY POLICY</h2>
+  
+<p>We may update this policy from time to time. If we make a significant change, especially to what we collect from children, we'll tell you in the App and ask you to agree again before it applies.</p>
+  
+<h2>11. CONTACT US</h2>
+  
+<p>If you have questions about this Privacy Policy or your child's information, please contact us at:</p>
+  
+<p><strong>Happy Path Apps, LLC</strong><br>Email: <a href="mailto:david@happypathapps.co">david@happypathapps.co</a><br>Phone: 719-238-4211</p>
+</div>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  function toggleMenu() {
+    const nav = document.getElementById('navbar');
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    nav.classList.toggle('menu-open');
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
