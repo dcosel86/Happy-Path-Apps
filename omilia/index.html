@@ -500,6 +500,27 @@
   .om-plan-card .om-hero-cta { margin-top: 26px; }
 
   /* Guides */
+  /* Omilía Kids promo */
+  .om-kids { padding: 0 32px 90px; background: var(--blue-50); }
+  .om-kids-card {
+    max-width: 1000px; margin: 0 auto; position: relative; overflow: hidden;
+    display: grid; grid-template-columns: 150px 1fr auto; gap: 28px; align-items: center;
+    padding: 28px 36px; border-radius: 24px; text-decoration: none; color: inherit;
+    background: linear-gradient(135deg, #CDEBFF 0%, #E9F8DD 100%);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .om-kids-card:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(24,40,83,0.12); }
+  .om-kids-card img { width: 150px; height: auto; display: block; }
+  .om-kids-card .tag { font-size: 0.78rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #3E8A26; }
+  .om-kids-card h2 { font-size: 1.6rem; color: var(--navy); margin-top: 4px; }
+  .om-kids-card p { color: #4A5568; margin-top: 6px; line-height: 1.55; }
+  .om-kids-card .go { font-weight: 700; color: var(--navy); background: #FFD233; padding: 12px 22px; border-radius: 50px; white-space: nowrap; }
+  @media (max-width: 760px) {
+    .om-kids { padding: 0 16px 64px; }
+    .om-kids-card { grid-template-columns: 1fr; text-align: center; gap: 12px; padding: 26px 22px; }
+    .om-kids-card img { width: 120px; margin: 0 auto; }
+    .om-kids-card .go { justify-self: center; }
+  }
   .om-guides { padding: 90px 32px; background: var(--blue-50); }
   .om-guides-inner { max-width: 1000px; margin: 0 auto; }
   .om-guide-card {
@@ -940,6 +961,19 @@
       <span class="go">Read the guide &rarr;</span>
     </a>
   </div>
+</section>
+
+<!-- Omilía Kids -->
+<section class="om-kids">
+  <a class="om-kids-card fade-up" href="/omilia-kids/">
+    <img src="/omilia-kids/images/omi/omi_wave.webp" width="520" height="514" loading="lazy" alt="Omi the otter waving">
+    <div>
+      <span class="tag">New &middot; For ages 3+</span>
+      <h2>Have a little one? Meet Omil&iacute;a Kids.</h2>
+      <p>Speech and language games for kids, with Omi the otter cheering every try. Stickers to collect, no ads and no pressure.</p>
+    </div>
+    <span class="go">Meet Omi &rarr;</span>
+  </a>
 </section>
 
 <!-- Reviews + what's included -->
