@@ -338,6 +338,7 @@ def render(a):
     ] + ['<script type="application/ld+json">' + json.dumps(d, ensure_ascii=False) + '</script>' for d in ld]
     html = ('<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n'
             '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n' + '\n'.join(tags) + '\n'
+            '<script src="/omilia/tracking.js" defer></script>\n'
             '<link rel="preconnect" href="https://fonts.googleapis.com">\n'
             '<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">\n'
             '<style>' + base_css + footer_css + PAGE_CSS + '</style>\n</head>\n<body>\n\n' + nav_html + f"""
